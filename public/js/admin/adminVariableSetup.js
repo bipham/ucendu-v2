@@ -1,0 +1,1 @@
+$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('[name="_token"]').val()}});var baseUrl=document.location.origin,mainUrl=baseUrl.substring(13),question_number_input=1,number_select_option="",type_question_select="A B C",value_checkbox_option="A",value_radio_option="A",in_question=!1,in_radio_question=!1,in_checkbox_question=!1;

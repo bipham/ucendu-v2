@@ -1,0 +1,42 @@
+.img-feature-lesson {
+    width: 150px;
+    height: 150px;
+}
+
+.img-upload-product {
+    width: 200px;
+    height: 200px;
+}
+
+table#reading-list-lesson td {
+    vertical-align: middle;
+}
+
+.btn-edit-basic-info {
+    display: inline;
+    color: #c17a16;
+}
+
+.btn-edit-basic-info:hover {
+    color: #449d44;
+}
+
+h6.title-info-custom {
+    display: inline;
+}
+
+#managerLessonContent .tab-pane {
+    padding: 20px 0;
+}
+
+.dataTables_wrapper {
+    width: 100%;
+}
+
+.form-control {
+    padding: .5rem .1em;
+}
+
+ul.list-ordered li {
+    display: inline;
+}
