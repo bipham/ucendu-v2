@@ -24,9 +24,10 @@
     {{--<link rel="stylesheet" href="{{asset('public/libs/jcubic-splitter/css/jquery.splitter.css')}}" />--}}
     <script>
         {{--var current_user = {!! json_encode(Auth::user()) !!};--}}
-        let current_username = {!! json_encode(Auth::user()->username) !!};
-        let current_user_id = {!! json_encode(Auth::id()) !!};
-        let current_user_avatar = {!! json_encode(Auth::user()->avatar) !!};
+        var current_username = {!! json_encode(Auth::user()->username) !!};
+        var current_user_id = {!! json_encode(Auth::id()) !!};
+        var current_user_avatar = {!! json_encode(Auth::user()->avatar) !!};
+        var current_level_user = {!! json_encode(Auth::user()->level_user_id) !!};
     </script>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
     <script>
@@ -46,8 +47,8 @@
 <a href="#" id="shownoti" class="hidden">Hiển thị thông báo</a>
 <div class="overlay"></div>
 <div id="loading"></div>
-{{--@include('layout.header')--}}
-{{--@include('layout.menuHeaderReading')--}}
+@include('layout.header')
+@include('layout.menuHeaderReading')
 <div role="main" class="main main-page">
     @yield('top-information')
 

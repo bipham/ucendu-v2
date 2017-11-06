@@ -33,15 +33,26 @@ class ReadingQuestionAndAnswerLesson extends Model
         $new_comment_lesson->save();
         return $new_comment_lesson;
     }
-
+ 
     public function getAllRelatedUser($question_custom_id) {
-        return DB::table('users')
-            ->leftJoin('reading_question_and_answer_lessons', 'reading_question_and_answer_lessons.user_id', '=', 'users.id')
+         return DB::table('reading_question_and_answer_lessons')
+            ->leftJoin('users', 'reading_question_and_answer_lessons.user_id', '=', 'users.id')
             ->where('reading_question_and_answer_lessons.question_custom_id', $question_custom_id)
             ->where('reading_question_and_answer_lessons.status', 1)
             ->where('users.level_user_id', '>', 1)
-//            ->groupBy('users.id')
-            ->select(['users.id', 'users.username'])
+            ->groupBy('reading_question_and_answer_lessons.user_id')
+            ->select(['reading_question_and_answer_lessons.user_id'])
+            ->get();
+    }
+
+    public function getAllRelatedAdmins($question_custom_id) {
+         return DB::table('reading_question_and_answer_lessons')
+            ->leftJoin('users', 'reading_question_and_answer_lessons.user_id', '=', 'users.id')
+            ->where('reading_question_and_answer_lessons.question_custom_id', $question_custom_id)
+            ->where('reading_question_and_answer_lessons.status', 1)
+            ->where('users.level_user_id', 1)
+            ->groupBy('reading_question_and_answer_lessons.user_id')
+            ->select(['reading_question_and_answer_lessons.user_id'])
             ->get();
     }
 }

@@ -20,8 +20,8 @@ class CommentQuestionController extends Controller
         $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
         $readingNotificationService = new ReadingNotificationService();
         $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson($question_custom_id, $user_id, $reply_comment_id, $content_cmt);
-        $related_users = $readingQuestionAnswerLessonService->getAllRelatedUser($question_custom_id);
-        $readingNotificationService->pushCommentNotification($related_users, $new_comment);
+        $related_admins = $readingQuestionAnswerLessonService->getAllRelatedAdmins($question_custom_id);
+        $readingNotificationService->pushCommentNotificationToAdmin($related_admins, $new_comment);
         return json_encode(['new_comment' => $new_comment]);
     }
 }

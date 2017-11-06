@@ -38,5 +38,9 @@ class ReadingQuestionAnswerLessonService {
     public function getAllRelatedUser($question_custom_id) {
         return $this->_readingQuestionAndAnswerLessonModel->getAllRelatedUser($question_custom_id);
     }
+
+    public function getAllRelatedAdmins($question_custom_id) {
+        return $this->_readingQuestionAndAnswerLessonModel->getAllRelatedAdmins($question_custom_id);
+    }
 }
 ?>

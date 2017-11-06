@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Events\CommentNotificationEvent;
-use App\Models\User;
+//use App\Models\User;
 use App\Services\ReadingQuestionAnswerLessonService;
 
 class ReadingNotificationController extends Controller
@@ -18,18 +18,16 @@ class ReadingNotificationController extends Controller
         return view("client.reading");
     }
     public function fireEvent(){
-
-        event(new CommentNotificationEvent("Hi, I'm Bi send message to you message!"));
-
-        // Truyền message lên server Pusher
-        return "Message has been sent.";
+        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
+        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(8, Auth::id(), 30, 'bi pro');
+        dd($new_comment);
     }
 
     public function testEvent(){
-        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
-        $related_users = $readingQuestionAnswerLessonService->getAllRelatedUser(7);
-        $users = User::all();
-dd($related_users);
+        // $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
+        // $related_users = $readingQuestionAnswerLessonService->getAllRelatedUser(7);
+        $users = \App\User::all();
+// dd($related_users);
         foreach ($users as $this_user) {
             if ($this_user->id != Auth::id()) {
                 event(new TestCommentEvent("Hi, I'm " . Auth::user()->username . " send message to " . $this_user->username . "!", Auth::user(), $this_user->id, time()));

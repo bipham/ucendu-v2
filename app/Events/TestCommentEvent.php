@@ -19,15 +19,21 @@ class TestCommentEvent implements ShouldBroadcast
      *
      * @return void
      */
+    public $title;
     public $message;
-    public $user;
+    public $username;
+    public $avatar;
+    public $comment;
     public $room;
     public $time_code;
 
-    public function __construct($message, $user, $room, $time_code)
+    public function __construct($title, $message, $username, $avatar, $comment, $room, $time_code)
     {
+        $this->title = $title;
         $this->message = $message;
-        $this->user = $user;
+        $this->username = $username;
+        $this->avatar = $avatar;
+        $this->comment = $comment;
         $this->room = $room;
         $this->time_code = $time_code;
     }
@@ -40,10 +46,5 @@ class TestCommentEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new PrivateChannel('room-'.$this->room);
-    }
-
-    public function broadcastWith()
-    {
-        return ['message' => $this->message, 'user_id' => $this->room, 'time_code' => $this->time_code];
     }
 }

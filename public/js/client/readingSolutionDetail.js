@@ -71,170 +71,16 @@ function showExplanation(question_custom_id, question_order, isTrigger) {
             $('#commentArea .primary-comment').html('');
             if (data.list_comments.length > 0) {
                 jQuery.each( data.list_comments, function( index, list_comment ) {
-                    var avatar = list_comment.avatar;
-                    var cmt_content = list_comment.content_cmt;
-                    var time_ago = list_comment.updated_at;
-                    var cmt_id = list_comment.id;
-                    var question_id = list_comment.question_custom_id;
-                    var username = list_comment.username;
-                    var reply_id = list_comment.reply_comment_id;
-                    var isPrivated = '';
-                    var isPublic = '';
-                    var status_class = 'item-cmt-public';
-                    if (list_comment.private == 1) {
-                        isPrivated = 'disabled';
-                        status_class = 'item-cmt-private';
-                    }
-                    else {
-                        isPublic = 'disabled';
-                    }
-
-                    if (data.current_user_info['level_user_id'] == 1) {
-                        if (reply_id == 0) {
-                            $('#commentArea .comments-area').append('<div class="row list-cmt-area list-cmt-' + cmt_id + '" data-cmt-id="' + cmt_id + '">' +
-                                '<div class="item-cmt cmt-' + cmt_id + ' ' + status_class + '" id="comment' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                +  username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                +  cmt_content
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-success btn-admin-custom btn-set-comment-public" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="setPublicReadingComment(' + cmt_id + ')"' + isPublic + '>Set public</button>'
-                                + '<button type="button" class="btn btn-warning btn-admin-custom btn-set-comment-private" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="setPrivateReadingComment(' + cmt_id + ')"' + isPrivated + '>Set private</button>'
-                                + '<button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="deleteReadingComment(' + cmt_id + ')">Del</button>'
-                                + '<button type="button" class="btn btn-reply-cmt btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>'
-                                + '</div>');
-                        }
-                        else {
-                            $('.list-cmt-' + reply_id).append('<div class="item-cmt item-sub-cmt cmt-' + cmt_id + ' ' + status_class + '" id="comment' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                +  username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                +  cmt_content
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-success btn-admin-custom btn-set-comment-public" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="setPublicReadingComment(' + cmt_id + ')"' + isPublic + '>Set public</button>'
-                                + '<button type="button" class="btn btn-warning btn-admin-custom btn-set-comment-private" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="setPrivateReadingComment(' + cmt_id + ')"' + isPrivated + '>Set private</button>'
-                                + '<button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="' + cmt_id + '" data-question-id="' + question_id + '" data-reply-id="' + reply_id + '" onclick="deleteReadingComment(' + cmt_id + ')">Del</button>'
-                                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>');
-                        }
-                    }
-                    else if ((list_comment.private == 0) || (list_comment.user_id == data.current_user_info.id)) {
-                        if (reply_id == 0) {
-                            $('#commentArea .comments-area').append('<div class="row list-cmt-area list-cmt-' + cmt_id + '" data-cmt-id="' + cmt_id + '">' +
-                                '<div class="item-cmt cmt-' + cmt_id + '" id="comment' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                +  username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                +  cmt_content
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>'
-                                + '</div>');
-                        }
-                        else {
-                            $('.list-cmt-' + reply_id).append('<div class="item-cmt item-sub-cmt cmt-' + cmt_id + '" id="comment' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                +  username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                +  cmt_content
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>');
-                        }
-                    }
+                    insertNewComment(data.current_user_info.id, data.current_user_info.level_user_id, list_comment.id, list_comment.private, list_comment.avatar, list_comment.content_cmt, list_comment.updated_at, question_custom_id, list_comment.username, list_comment.reply_comment_id, list_comment.user_id)
                 });
             }
 
             //Parse input comment primary:
-            var avatar = current_user_avatar;
-            var username = current_username;
-            var link = 'enterNewComment';
-
-            $('#commentArea .primary-comment').append('<div class="item-reply-cmt" id="replyComment">'
-                + '<span class="img-avatar">'
-                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                + '</span>'
-                + '<span class="item-cmt-content">'
-                + '<div class="item-cmt-header">'
-                +  username
-                + '</div>'
-                + '<div class="item-cmt-body">'
-                + '<input type="text" placeholder=" Write your comment ..." class="reply-cmt reply-cmt-' + question_custom_id + '" data-reply-cmt-id="0" data-question-id = "' + question_custom_id + '">'
-                + '</div>'
-                + '<div class="item-time-cmt">'
-                + '</div>'
-                + '</span>'
-                + '</div>'
-                + '</div>');
+            parseInputCommentPrimary(current_user_avatar, current_username, question_custom_id);
 
             var numItems = $('#commentArea .comments-area .list-cmt-area').length;
             if (numItems == 0) {
-                $('#commentArea .comments-area').append('<p class="no-cmt">Chua co comment nao cho cau hoi nay!</p>');
+                $('#commentArea .comments-area').append('<p class="no-cmt">No comment for this question, be a first persion comment on this!</p>');
             }
 
             $('#loading').hide();
@@ -307,71 +153,12 @@ function enterComment(e) {
                 dataType: "json",
                 data: {'_token':token, user_id: user_id, content_cmt: content_cmt, question_custom_id: question_custom_id, reply_id: reply_id},
                 success: function (data) {
-                    var avatar = current_user_avatar;
-                    var time_ago = 'Just now';
-                    var cmt_id = data.new_comment.id;
-                    var username = current_username;
                     $('p.no-cmt').remove();
                     $('.item-reply-sub-cmt').remove();
-                    if ((data.new_comment.private == 0) || (data.new_comment.user_id == user_id)) {
-                        if (reply_id == 0) {
-                            $('#commentArea .comments-area').append('<div class="row list-cmt-area list-cmt-' + cmt_id + '" data-cmt-id="' + cmt_id + '">' +
-                                '<div class="item-cmt cmt-' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                + username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                + content_cmt
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>'
-                                + '</div>');
-                        }
-                        else {
-                            $('.list-cmt-' + reply_id).append('<div class="item-cmt item-sub-cmt cmt-' + cmt_id + '" data-cmt-id="' + cmt_id + '">'
-                                + '<span class="img-avatar">'
-                                + '<img alt="" src="/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
-                                + '</span>'
-                                + '<span class="item-cmt-content">'
-                                + '<div class="item-cmt-header">'
-                                + username
-                                + '</div>'
-                                + '<div class="item-cmt-body">'
-                                + content_cmt
-                                + '</div>'
-                                + '<div class="item-time-cmt">'
-                                + '<span class="img-time-cmt">'
-                                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
-                                + '</span>'
-                                + '<span class="time-ago-cmt">'
-                                + time_ago
-                                + '</span>'
-                                + '<span class="reply-cmt pull-right">'
-                                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + cmt_id + ', ' + question_custom_id + ')">Reply</button>'
-                                + '</span>'
-                                + '</div>'
-                                + '</span>'
-                                + '</div>');
-                        }
-                    }
+                    insertNewComment(current_user_id, current_level_user, data.new_comment.id, data.new_comment.private, current_user_avatar, content_cmt, 'Just now', question_custom_id, current_username, reply_id, current_user_id);
                     $('input.reply-cmt-' + question_custom_id).data('reply-cmt-id', 0);
                     $('html,body').animate({
-                        scrollTop: $(".cmt-" + cmt_id).offset().top - 20
+                        scrollTop: $(".cmt-" + data.new_comment.id).offset().top - 20
                     }, 500);
                 },
                 error: function (data) {
@@ -433,3 +220,153 @@ function replyComment(cmt_id, question_custom_id) {
 }
 
 $(document).on("keypress","input.reply-cmt",enterComment);
+
+function parseInputCommentPrimary(avatar, username, question_custom_id) {
+    $('#commentArea .primary-comment').append('<div class="item-reply-cmt" id="replyComment">'
+        + '<span class="img-avatar">'
+        + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
+        + '</span>'
+        + '<span class="item-cmt-content">'
+        + '<div class="item-cmt-header">'
+        +  username
+        + '</div>'
+        + '<div class="item-cmt-body">'
+        + '<input type="text" placeholder=" Write your comment ..." class="reply-cmt reply-cmt-' + question_custom_id + '" data-reply-cmt-id="0" data-question-id = "' + question_custom_id + '">'
+        + '</div>'
+        + '<div class="item-time-cmt">'
+        + '</div>'
+        + '</span>'
+        + '</div>'
+        + '</div>');
+}
+
+function insertNewComment(current_user_id, current_level_user, comment_id, comment_private, avatar, comment_content, time_ago, question_custom_id, username, reply_comment_id, comment_user_id) {
+    var isPrivated = '';
+    var isPublic = '';
+    var status_class = 'item-cmt-public';
+    if (comment_private == 1) {
+        isPrivated = 'disabled';
+        status_class = 'item-cmt-private';
+    }
+    else {
+        isPublic = 'disabled';
+    }
+    if (current_level_user == 1) {
+        if (reply_comment_id == 0) {
+            $('#commentArea .comments-area').append('<div class="row list-cmt-area list-cmt-' + comment_id + '" data-cmt-id="' + comment_id + '">' +
+                '<div class="item-cmt cmt-' + comment_id + ' ' + status_class + '" id="comment' + comment_id + '" data-cmt-id="' + comment_id + '">'
+                + '<span class="img-avatar">'
+                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
+                + '</span>'
+                + '<span class="item-cmt-content">'
+                + '<div class="item-cmt-header">'
+                +  username
+                + '</div>'
+                + '<div class="item-cmt-body">'
+                +  comment_content
+                + '</div>'
+                + '<div class="item-time-cmt">'
+                + '<span class="img-time-cmt">'
+                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
+                + '</span>'
+                + '<span class="time-ago-cmt">'
+                + time_ago
+                + '</span>'
+                + '<span class="reply-cmt pull-right">'
+                + '<button type="button" class="btn btn-success btn-admin-custom btn-set-comment-public" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="setPublicReadingComment(' + comment_id + ')"' + isPublic + '>Set public</button>'
+                + '<button type="button" class="btn btn-warning btn-admin-custom btn-set-comment-private" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="setPrivateReadingComment(' + comment_id + ')"' + isPrivated + '>Set private</button>'
+                + '<button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="deleteReadingComment(' + comment_id + ')">Del</button>'
+                + '<button type="button" class="btn btn-reply-cmt btn-sm btn-outline-primary" onclick="replyComment(' + comment_id + ', ' + question_custom_id + ')">Reply</button>'
+                + '</span>'
+                + '</div>'
+                + '</span>'
+                + '</div>'
+                + '</div>');
+        }
+        else {
+            $('.list-cmt-' + reply_comment_id).append('<div class="item-cmt item-sub-cmt cmt-' + comment_id + ' ' + status_class + '" id="comment' + comment_id + '" data-cmt-id="' + comment_id + '">'
+                + '<span class="img-avatar">'
+                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
+                + '</span>'
+                + '<span class="item-cmt-content">'
+                + '<div class="item-cmt-header">'
+                +  username
+                + '</div>'
+                + '<div class="item-cmt-body">'
+                +  comment_content
+                + '</div>'
+                + '<div class="item-time-cmt">'
+                + '<span class="img-time-cmt">'
+                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
+                + '</span>'
+                + '<span class="time-ago-cmt">'
+                + time_ago
+                + '</span>'
+                + '<span class="reply-cmt pull-right">'
+                + '<button type="button" class="btn btn-success btn-admin-custom btn-set-comment-public" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="setPublicReadingComment(' + comment_id + ')"' + isPublic + '>Set public</button>'
+                + '<button type="button" class="btn btn-warning btn-admin-custom btn-set-comment-private" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="setPrivateReadingComment(' + comment_id + ')"' + isPrivated + '>Set private</button>'
+                + '<button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="' + comment_id + '" data-question-id="' + question_custom_id + '" data-reply-id="' + reply_comment_id + '" onclick="deleteReadingComment(' + comment_id + ')">Del</button>'
+                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + comment_id + ', ' + question_custom_id + ')">Reply</button>'
+                + '</span>'
+                + '</div>'
+                + '</span>'
+                + '</div>');
+        }
+    }
+    else if ((comment_private == 0) || (comment_user_id == current_user_id)) {
+        if (reply_comment_id == 0) {
+            $('#commentArea .comments-area').append('<div class="row list-cmt-area list-cmt-' + comment_id + '" data-cmt-id="' + comment_id + '">' +
+                '<div class="item-cmt cmt-' + comment_id + '" id="comment' + comment_id + '" data-cmt-id="' + comment_id + '">'
+                + '<span class="img-avatar">'
+                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
+                + '</span>'
+                + '<span class="item-cmt-content">'
+                + '<div class="item-cmt-header">'
+                +  username
+                + '</div>'
+                + '<div class="item-cmt-body">'
+                +  comment_content
+                + '</div>'
+                + '<div class="item-time-cmt">'
+                + '<span class="img-time-cmt">'
+                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
+                + '</span>'
+                + '<span class="time-ago-cmt">'
+                + time_ago
+                + '</span>'
+                + '<span class="reply-cmt pull-right">'
+                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + comment_id + ', ' + question_custom_id + ')">Reply</button>'
+                + '</span>'
+                + '</div>'
+                + '</span>'
+                + '</div>'
+                + '</div>');
+        }
+        else {
+            $('.list-cmt-' + reply_comment_id).append('<div class="item-cmt item-sub-cmt cmt-' + comment_id + '" id="comment' + comment_id + '" data-cmt-id="' + comment_id + '">'
+                + '<span class="img-avatar">'
+                + '<img alt="" src="/public/storage/img/users/' + avatar + '" class="img-custom avatar-custom" />'
+                + '</span>'
+                + '<span class="item-cmt-content">'
+                + '<div class="item-cmt-header">'
+                +  username
+                + '</div>'
+                + '<div class="item-cmt-body">'
+                +  comment_content
+                + '</div>'
+                + '<div class="item-time-cmt">'
+                + '<span class="img-time-cmt">'
+                + '<img alt="time-cmt" src="/public/imgs/original/time.png" class="img-time-cmt" />'
+                + '</span>'
+                + '<span class="time-ago-cmt">'
+                + time_ago
+                + '</span>'
+                + '<span class="reply-cmt pull-right">'
+                + '<button type="button" class="btn btn-sm btn-outline-primary" onclick="replyComment(' + comment_id + ', ' + question_custom_id + ')">Reply</button>'
+                + '</span>'
+                + '</div>'
+                + '</span>'
+                + '</div>');
+        }
+    }
+}

@@ -9,8 +9,8 @@
 @if(Auth::check())
 <ul class="navbar-nav navbar-custom-header primary-header-custom navbar-info-custom" id="userNotiAction" data-user-id="{!! Auth::id() !!}">
         <?php
-        $readingCommentNotificationModel = new App\Models\ReadingCommentNotification();
-        $totalNoti = $readingCommentNotificationModel->getTotalNumberCommentNotificationNoRead(Auth::id());
+    $user = Auth::user();
+    //        dd($user->notifications);
         ?>
             <li class="dropdown dropdown-custom open img-status-header">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,9 +29,9 @@
         <li class="notification-status img-status-header">
                 <i class="fa fa-globe noti-status img-status-custom" aria-hidden="true"></i>
                 <span class="print-number-noti">
-                    @if($totalNoti != 0)
-                        <sup class="total-noti">{!! $totalNoti !!}</sup>
-                    @endif
+                    {{--@if($totalNoti != 0)--}}
+                        <sup class="total-noti">2</sup>
+                    {{--@endif--}}
             </span>
                 <div id="notifications-container-menu">
                     <div class="notifications-header">
@@ -41,7 +41,13 @@
                     <div id="notifications-body">
                         <div class="list-noti-content">
                             <div class="content-noti-custom" id="listNotiArea">
-
+                                @foreach ($user->notifications as $notification)
+                                @if ($notification->read_at != null)
+                                <br />Read at: {!!  $notification->read_at!!}
+                                @else
+                                    <br /> unread!
+                                @endif
+                                @endforeach
                             </div>
                         </div>
                     </div>
