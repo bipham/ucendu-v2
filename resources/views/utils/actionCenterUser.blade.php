@@ -9,17 +9,14 @@
 @if(Auth::check())
 <ul class="navbar-nav navbar-custom-header primary-header-custom navbar-info-custom" id="userNotiAction" data-user-id="{!! Auth::id() !!}">
         <?php
-    $user = Auth::user();
-    $total_notifications = count($user->unreadnotifications);
+        $user = Auth::user();
+        $total_notifications = count($user->unreadnotifications);
         ?>
             <li class="dropdown dropdown-custom open img-status-header">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{Auth::user()->username}}
                 </button>
                 <div class="dropdown-menu profile-dropdown-custom" aria-labelledby="dropdownMenu">
-                    {{--<a class="dropdown-item" href="{!! url('profile', [Auth::user()->username]) !!}">Hồ sơ</a>--}}
-                    {{--<a class="dropdown-item" href="{{route('MyStore')}}">Cửa hàng của tôi</a>--}}
-                    {{--<hr>--}}
                     <a class="dropdown-item" href="{!! url('logout') !!}">Log out</a>
                 </div>
             </li>
@@ -41,13 +38,7 @@
                     <div id="notifications-body">
                         <div class="list-noti-content">
                             <div class="content-noti-custom" id="listNotiArea">
-                                @foreach ($user->notifications as $notification)
-                                @if ($notification->read_at != null)
-                                <br />Read at: {!!  $notification->read_at!!}
-                                @else
-                                    <br /> {!! snake_case(class_basename($notification->type)) !!}
-                                @endif
-                                @endforeach
+
                             </div>
                         </div>
                     </div>

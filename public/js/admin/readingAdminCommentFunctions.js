@@ -1,17 +1,18 @@
 /**
- * Created by BiPham on 8/18/2017.
+ * Created by nobikun1412 on 11/7/2017.
  */
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('[name="_token"]').val()
     }
 });
-
+var token = $('[name="_token"]').val();
 var baseUrl = document.location.origin;
+
 function deleteReadingComment(id) {
     bootbox.confirm({
         title: "Delete Reading Comment",
-        message: "Do you want to delete this comment?",
+        message: "Do you want to delete this comment?" + id,
         buttons: {
             cancel: {
                 label: '<i class="fa fa-times"></i> Cancel',
@@ -31,13 +32,16 @@ function deleteReadingComment(id) {
                     dataType: "json",
                     // data: { },
                     success: function (data) {
-                        bootbox.alert({
-                            message: "Delete comment success! " + data.result,
-                            backdrop: true,
-                            callback: function(){
-                                location.href= baseUrl + '/listCommentReading';
-                            }
-                        });
+                        var reply_id_deleted = $('.btn-set-comment-public[data-id=' + id + ']').data('reply-id');
+                        if (reply_id_deleted == 0) {
+                            $('.list-cmt-' + id).remove();
+                            $('.item-comment-' + id).remove();
+                            $('.item-row[data-reply-id=' + id + ']').remove();
+                        }
+                        else {
+                            $('#comment' + id).remove();
+                            $('.item-comment-' + id).remove();
+                        }
                     },
                     error: function (data) {
                         bootbox.alert({
@@ -52,6 +56,7 @@ function deleteReadingComment(id) {
 }
 
 function setPublicReadingComment(id) {
+    var $this = $(this);
     bootbox.confirm({
         title: "Set public reading comment",
         message: "Do you want to set public for this comment?",
@@ -74,13 +79,10 @@ function setPublicReadingComment(id) {
                     dataType: "json",
                     // data: { },
                     success: function (data) {
-                        bootbox.alert({
-                            message: "Set public comment success! " + data.result,
-                            backdrop: true,
-                            callback: function(){
-                                location.href= baseUrl + '/listCommentReading';
-                            }
-                        });
+                        $('.status-comment-' + id + ' .status-public').removeClass('hidden');
+                        $('.status-comment-' + id + ' .status-private').addClass('hidden');
+                        $('.btn-set-comment-public[data-id=' + id + ']').prop('disabled', true);
+                        $('.btn-set-comment-private[data-id=' + id + ']').prop('disabled', false);
                     },
                     error: function (data) {
                         bootbox.alert({
@@ -117,13 +119,10 @@ function setPrivateReadingComment(id) {
                     dataType: "json",
                     // data: { },
                     success: function (data) {
-                        bootbox.alert({
-                            message: "Set private comment success! " + data.result,
-                            backdrop: true,
-                            callback: function(){
-                                location.href= baseUrl + '/listCommentReading';
-                            }
-                        });
+                        $('.status-comment-' + id + ' .status-public').addClass('hidden');
+                        $('.status-comment-' + id + ' .status-private').removeClass('hidden');
+                        $('.btn-set-comment-public[data-id=' + id + ']').prop('disabled', false);
+                        $('.btn-set-comment-private[data-id=' + id + ']').prop('disabled', true);
                     },
                     error: function (data) {
                         bootbox.alert({

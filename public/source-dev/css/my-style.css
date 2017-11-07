@@ -987,7 +987,7 @@ Action Center User
 	overflow: visible;
 	position: absolute;
 	top: 55px;
-	/*right: -20px;*/
+	right: 0px;
 	width: 450px;
 	z-index: 10000;
 	display: none;
@@ -1148,7 +1148,7 @@ Action Center User
 	color: #474B54;
 	display: inline-block;
 	/* float: left; */
-	width: 57%;
+	width: calc(100% - 100px);
 }
 
 .img-auto-center.img-lesson-preview {

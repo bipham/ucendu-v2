@@ -21,13 +21,10 @@ Route::get('login', ['as'=>'getLogin', 'uses' => 'Auth\LoginController@getLogin'
 Route::post('login',['as'=>'postLogin','uses'=>'Auth\LoginController@postLogin']);
 Route::get('changePassword', ['as'=>'getChangePassword', 'uses' => 'Client\UserController@getChangePassword']);
 Route::post('changePassword',['as'=>'postChangePassword','uses'=>'Client\UserController@postChangePassword']);
-Route::get('getNotification/{user_id}',['as'=>'getMatchNotification','uses'=>'ReadingNotificationController@getNotification'])->middleware('auth');
 Route::get('logout',['as'=>'logout','uses'=>'Auth\LoginController@getLogout'])->middleware('auth');
 Route::get('deleteCommentReading/{comment_id}',['as'=>'deleteCommentReading','uses'=>'Admin\ReadingCommentController@deleteCommentReading']);
 Route::get('setPublicReadingComment/{comment_id}',['as'=>'setPublicReadingComment','uses'=>'Admin\ReadingCommentController@setPublicReadingComment']);
 Route::get('setPrivateReadingComment/{comment_id}',['as'=>'setPrivateReadingComment','uses'=>'Admin\ReadingCommentController@setPrivateReadingComment']);
-Route::get('readNotification/{type_noti}--{id}',['as'=>'readNotification','uses'=>'ReadingNotificationController@readNotification']);
-Route::get('markAllNotificationAsRead',['as'=>'markAllNotificationAsRead','uses'=>'ReadingNotificationController@markAllNotificationAsRead']);
 
 /*********************************************************
  *
@@ -79,7 +76,7 @@ Route::group(['domain' => 'admin.{nameDomain}', 'middleware' => ['adminAuth']], 
     //********** For Reading Notification + Comments *************/
     Route::get('createNewCate',['as'=>'createNewCate','uses'=>'Admin\CateController@createNewCate']);
 //    Route::get('createNewTypeQuiz',['as'=>'createNewTypeQuiz','uses'=>'Admin\TypeQuestionController@createNewTypeQuiz']);
-    Route::get('listCommentReading',['as'=>'listCommentReading','uses'=>'Admin\ReadingCommentController@listCommentReading']);
+    Route::get('managerCommentReading',['as'=>'managerCommentReading','uses'=>'Admin\ReadingCommentController@managerCommentReading']);
 
     //********** For Reading User *************/
     Route::get('createNewUser',['as'=>'getCreateNewUser','uses'=>'Admin\UserController@getCreateNewUser']);
@@ -124,6 +121,10 @@ Route::group(['domain'=>'{nameDomain}', 'middleware' => ['clientAuth']], functio
 // Truyển message lên server Pusher
     Route::get('fire-event','ReadingNotificationController@fireEvent');
     Route::get('test-event','ReadingNotificationController@testEvent');
+
+    Route::get('getNotification',['as'=>'getMatchNotification','uses'=>'ReadingNotificationController@getNotification'])->middleware('auth');
+    Route::get('readNotification/{id}',['as'=>'readNotification','uses'=>'ReadingNotificationController@readNotification']);
+    Route::get('markAllNotificationAsRead',['as'=>'markAllNotificationAsRead','uses'=>'ReadingNotificationController@markAllNotificationAsRead']);
 
     //********** For Reading Solution *************
     Route::get('showComments/{question_id_custom}',['as'=>'showComments','uses'=>'Client\CommentQuestionController@getComments']);

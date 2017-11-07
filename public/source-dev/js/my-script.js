@@ -1,4 +1,3 @@
-var myId = $('#userNotiAction').data('user-id');
 var baseUrl = document.location.origin;
 var noti_container = '';
 var noti_header = '';
@@ -6,7 +5,6 @@ var noti_area = '';
 var noti_fixed_element = '';
 var openNoti = false;
 var openNotiFixed = false;
-var isStart = false;
 
 $(".panel-left").resizable({
     handleSelector: ".splitter",
@@ -17,57 +15,7 @@ $(".panel-top").resizable({
     resizeWidth: false
 });
 
-jQuery("document").ready(function($){
-
-    var nav = $('.menu-reading');
-
-    $('#myTabReading a:not(.reading-test-quiz)').on('shown.bs.tab', function (e) {
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 139) {
-                nav.addClass("reading-header-fixed");
-                $('.left-custom #notifications-container-menu').hide();
-                $('.left-custom .noti-status').removeClass('white-font-class');
-                openNoti = false;
-            } else {
-                nav.removeClass("reading-header-fixed");
-                $('.action-user-center-fixed #notifications-container-menu').hide();
-                $('.action-user-center-fixed .noti-status').removeClass('white-font-class');
-                openNotiFixed = false;
-            }
-        });
-    });
-    $('#myTabReading a.reading-test-quiz').on('shown.bs.tab', function (e) {
-        $(window).unbind('scroll');
-        $('footer.navbar-fixed-bottom').addClass('hidden');
-        $('body').addClass('overflow-hidden-class');
-    });
-
-    $('#myTabReading a.reading-solution-quiz').on('shown.bs.tab', function (e) {
-        $('footer.navbar-fixed-bottom').addClass('hidden');
-    });
-
-    $('#myTabReading a:not(.reading-test-quiz)').click(function () {
-        $('header#header').removeClass('hidden');
-        $('.menu-reading').removeClass('reading-header-fixed');
-        $('footer.navbar-fixed-bottom').removeClass('hidden');
-        $('body').removeClass('overflow-hidden-class');
-    });
-
-    $('#myTabReading a.reading-test-quiz').click(function () {
-        if (isStart) {
-            $('header#header').addClass('hidden');
-            $('.menu-reading').addClass('reading-header-fixed');
-        }
-        $('body').addClass('overflow-hidden-class');
-        $('footer.navbar-fixed-bottom').addClass('hidden');
-    });
-
-    $('#myTabReading a.reading-solution-quiz').click(function () {
-        $('footer.navbar-fixed-bottom').addClass('hidden');
-    });
-
-});
-
+//Change status notification display:
 $(document).mouseup(function(e)
 {
     var container = $('.left-custom .notification-status');
@@ -140,7 +88,7 @@ $('.noti-status').click(function (e) {
 });
 
 function loadAllNotification(noti_area) {
-    var ajaxGetNotiUrl = baseUrl + '/getNotification/' + myId;
+    var ajaxGetNotiUrl = baseUrl + '/getNotification/';
     $.ajax({
         type: "GET",
         url: ajaxGetNotiUrl,
@@ -151,26 +99,18 @@ function loadAllNotification(noti_area) {
             var list_notis = data.list_notis;
             if (list_notis.length != 0) {
                 for (var i = 0; i < list_notis.length; i++) {
-                    console.log('read: ' + list_notis[i].read);
-                    if (list_notis[i].read == 0) {
-                        var classReadNoti = '';
-                    }
-                    else {
-                        console.log('read !0: ' + list_notis[i].read);
-                        var classReadNoti = 'seen-noti';
-                    }
-
-                    if (list_notis[i].type_noti == 'userCommentNotification') {
-                        var type_noti = 0;
-                        var url_link = baseUrl + '/reading/readingViewSolutionLesson/' + list_notis[i].lesson_id + '-' + list_notis[i].quiz_id + '?question=' + list_notis[i].question_id + '&comment=' + list_notis[i].comment_id;
-                        var content_noti = '<strong>' + list_notis[i].username_cmt + ' </strong> commented on <strong>' + list_notis[i].lesson_title + ' lesson</strong>';
-                        var noti_id = list_notis[i].noti_id;
+                    var classReadNoti = list_notis[i].read_at != null ? 'seen-noti' : '';
+                    var data_noti = list_notis[i].data.comment;
+                    if (list_notis[i].type == 'App\\Notifications\\CommentNotification') {
+                        var url_link = baseUrl + '/reading/' + data_noti.level_lesson_id + '-' + data_noti.level_lesson + '/readingViewSolutionLesson/' + data_noti.type_lesson_id + '-' + data_noti.lesson_id + '?question=' + data_noti.question_custom_id + '&comment=' + data_noti.id;
+                        var content_noti = '<strong>' + data_noti.username + ' </strong> commented on <strong>' + data_noti.title_lesson + ' - ' + data_noti.type_question + ' - ' + data_noti.level_lesson + '</strong>';
+                        var noti_id = '\'' + list_notis[i].id + '\'';
                     }
                     noti_area.append(
-                        '<div class="item-notification no-read ' + classReadNoti + '" onclick="readNotification(' + type_noti + ', ' + noti_id + ')">'
+                        '<div class="item-notification no-read ' + classReadNoti + '" onclick="readNotification(' + noti_id + ')">'
                         + '<a href="' + url_link + '" class="link-to-noti">'
                         + '<span class="img-user-send-noti img-auto-center">'
-                        + '<img alt="' + list_notis[i].username_cmt + '" src=' + list_notis[i].avatar_user + '"/public/storage/img/users/" class="img-user-noti-header img-auto-center-inner" />'
+                        + '<img alt="' + data_noti.username + '" src="/public/storage/img/users/' + data_noti.avatar + '" class="img-user-noti-header img-auto-center-inner" />'
                         + '</span>'
                         + '<span class="item-content-noti">'
                         + '<div class="item-body-noti">'
@@ -181,12 +121,9 @@ function loadAllNotification(noti_area) {
                         + '<img alt="time-noti" src="/public/imgs/original/time.png" class="img-time-noti" />'
                         + '</span>'
                         + '<span class="time-ago-noti">'
-                        + list_notis[i].noti_updated
+                        + data_noti.time_ago
                         + '</span>'
                         + '</div>'
-                        + '</span>'
-                        + '<span class="img-auto-center img-lesson-preview">'
-                        + '<img alt="' + list_notis[i].lesson_title + '" src="/storage/upload/images/img-feature/' + list_notis[i].image_lesson_feature + '" class="img-lesson-preview-header img-auto-center-inner" />'
                         + '</span>'
                         + '</a>'
                         + '</div>'
@@ -200,8 +137,8 @@ function loadAllNotification(noti_area) {
     });
 }
 
-function readNotification(type_noti, id) {
-    var ajaxReadNotiUrl = baseUrl + '/readNotification/' + type_noti + '--' + id;
+function readNotification(id) {
+    var ajaxReadNotiUrl = baseUrl + '/readNotification/' + id;
     $.ajax({
         type: "GET",
         url: ajaxReadNotiUrl,
@@ -217,7 +154,6 @@ function readNotification(type_noti, id) {
 
 function markAllNotificationAsRead() {
     var ajaxMarkAllNotificationAsRead = baseUrl + '/markAllNotificationAsRead';
-    // alert('dasd');/**/
     $.ajax({
         type: "GET",
         url: ajaxMarkAllNotificationAsRead,
@@ -232,7 +168,6 @@ function markAllNotificationAsRead() {
             });
         },
         error: function (data) {
-            console.log('Error:', data);
         }
     });
 }

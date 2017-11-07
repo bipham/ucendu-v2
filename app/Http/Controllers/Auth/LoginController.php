@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\User;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 

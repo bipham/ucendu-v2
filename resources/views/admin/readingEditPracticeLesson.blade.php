@@ -197,11 +197,8 @@
 @endsection
 
 @section('scripts')
-    {{--<script src="{{asset('public/js/admin/upload.js')}}"></script>--}}
     <script src="{{asset('public/js/admin/readingEditLesson.js')}}"></script>
-    {{--<script src="{{asset('public/js/admin/adminCreateNewItemFunctions.js')}}"></script>--}}
     <script src="{{asset('public/js/admin/readingEditPracticeFunctions.js')}}"></script>
     <script src="{{asset('public/js/admin/readingHighlight.js')}}"></script>
     <script src="{{asset('public/js/client/readingSolutionDetail.js')}}"></script>
-    <script src="{{asset('public/js/client/clientTestQuizFunctions.js')}}"></script>
 @endsection

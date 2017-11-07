@@ -30,7 +30,7 @@ class ReadingPracticeLesson extends Model
 
     public function User()
     {
-        return $this->belongsTo('App\Models\User', 'admin_responsibility');
+        return $this->belongsTo('App\User', 'admin_responsibility');
     }
 
     public function getTheLastLessonId() {

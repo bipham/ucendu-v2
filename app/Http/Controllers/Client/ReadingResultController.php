@@ -89,7 +89,7 @@ class ReadingResultController extends Controller
         $explanation = $readingQuestionLessonService->getExplanation($question_custom_id);
 
         //Get comments:
-        $list_comments = $readingQuestionAnswerLessonService->getAllCommentsByQuestionCustomId($question_custom_id);
+        $list_comments = $readingQuestionAnswerLessonService->getAllCommentsOfQuestion($question_custom_id);
 
         $current_user_info = $ucenduUserService->getLevelCurrentUser();
 

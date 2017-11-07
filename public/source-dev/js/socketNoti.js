@@ -1,78 +1,64 @@
 /**
  * Created by nobikun1412 on 27-May-17.
  */
-// Notification.requestPermission();
-var myId = $('#userNotiAction').data('user-id');
-var oldTotalNoti = $('.total-noti').html();
+
 var baseUrl = document.location.origin;
-console.log('ID: ' + myId);
-console.log('oldTotalNoti: ' + oldTotalNoti);
-var baseUrl = document.location.origin;
-var socket_connect = baseUrl + ':8890';
-var socket = io.connect(socket_connect);
-socket.emit('updateSocket', myId);
-socket.on('commentNotification', function (data) {
-    console.log('data: ' + data);
-    var dataJSON = JSON.parse(data);
-    var dataUser = dataJSON.user_cmt;
-    var readingLesson = dataJSON.readingLesson;
-// var url = '#';
-    var url = baseUrl + '/reading/readingViewSolutionLesson/' + dataJSON.lesson_id + '-' + dataJSON.quiz_id + '?question=' + dataJSON.question_id + '&comment=' + dataJSON.comment_id;
-    var body = dataUser.username + ' commented on ' + readingLesson.title + ' lesson.';
-
-    var img_feature = '/storage/img/users/' + dataUser.avatar;
-
-    var title_noti = 'New notification from Ucendu!';
-
-    var totalNoti = dataJSON.totalNoti;
-    if (typeof oldTotalNoti === "undefined") {
-        $('.left-custom .print-number-noti').append('<sup class="total-noti">' + totalNoti + '</sup>');
-        $('.action-user-center-fixed .print-number-noti').append('<sup class="total-noti">' + totalNoti + '</sup>');
-    }
-    else {
-        $('.left-custom sup.total-noti').html(totalNoti);
-        $('.action-user-center-fixed sup.total-noti').html(totalNoti);
-    }
-    oldTotalNoti = totalNoti;
-
-    if (Notification.permission == 'default')
-    {
-        alert('Bạn phải cho phép thông báo trên trình duyệt mới có thể hiển thị nó.');
-    }
-    // Ngược lại đã cho phép
-    else
-    {
-        // Tạo thông báo
-        notify = new Notification(
-            title_noti,
-            {
-                body: body,
-                icon: img_feature, // Hình ảnh
-                tag: url // Đường dẫn
-            }
-        );
-
-        notify.onclick = function () {
-            window.open(this.tag, '_blank');
-            // window.location.href = this.tag; // Di chuyển đến trang cho url = tag
-            readNotification(0, dataJSON.noti_id);
-            window.focus();
-        };
-    }
+var user_id = current_user_id;
+var public_connect = baseUrl + ':8890?user_id=' + user_id;
+var one_signal_user_id = 0;
+OneSignal.push(function() {
+    /* These examples are all valid */
+    OneSignal.getUserId(function (userId) {
+        console.log("OneSignal User ID:", userId);
+        one_signal_user_id = userId;
+    });
 });
 
+var socket_public = io.connect(public_connect);
+socket_public.emit('updateSocket', user_id);
 
-function readNotification(type_noti, id) {
-    var ajaxReadNotiUrl = baseUrl + '/readNotification/' + type_noti + '--' + id;
-    $.ajax({
-        type: "GET",
-        url: ajaxReadNotiUrl,
-        dataType: "json",
-        success: function (data) {
-            console.log('Success:', data);
-        },
-        error: function (data) {
-            console.log('Error:', data);
-        }
-    });
+socket_public.on('insert-new-comment', function (data) {
+    insertNewComment(current_user_id, current_level_user, data.comment.id, data.comment.private, data.avatar, data.comment.content_cmt, 'Just now', data.comment.question_custom_id, data.username, data.comment.reply_comment_id, data.comment.user_id);
+});
+
+socket_public.on('comment-notication', function (data) {
+    notifyMe(data);
+});
+
+//function add message
+function addMessageDemo(data) {
+    var liTag = $("<li class='list-group-item'></li>");
+    console.log(data);
+    liTag.html(data.message);
+    $('#messages').append(liTag);
+}
+
+function notifyMe(data) {
+    if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+        var options = {
+            body: data.message,
+            icon: "/public/imgs/original/logo.jpg",
+            dir : "ltr"
+        };
+        var notification = new Notification(data.title, options);
+    }
+    else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+            if (!('permission' in Notification)) {
+                Notification.permission = permission;
+            }
+
+            if (permission === "granted") {
+                var options = {
+                    body: data.message,
+                    icon: "/public/imgs/original/logo.jpg",
+                    dir : "ltr"
+                };
+                var notification = new Notification(data.title, options);
+            }
+        });
+    }
 }

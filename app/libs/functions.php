@@ -72,7 +72,10 @@ function timeFormat($date) {
     {
         if($date->diffInHours() < 1)
         {
-            $humanTime = $date->diffInMinutes().' minutes ago';
+            if ($date->diffInMinutes() == 0) {
+                $humanTime = 'Just now';
+            }
+            else $humanTime = $date->diffInMinutes().' minutes ago';
         }
         else{
             $humanTime = $date->format('H:i').' today';

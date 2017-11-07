@@ -2,14 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\TestCommentEvent;
-use App\Notifications\CommentNotification;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Events\CommentNotificationEvent;
-//use App\Models\User;
 use App\Services\ReadingQuestionAnswerLessonService;
+use App\Services\ReadingNotificationService;
+use App\Events\CommentNotificationEvent;
 
 class ReadingNotificationController extends Controller
 {
@@ -18,32 +14,40 @@ class ReadingNotificationController extends Controller
         return view("client.reading");
     }
     public function fireEvent(){
+//        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
+//        $list_notifications = $readingQuestionAnswerLessonService->getAllComments();
         $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
-        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(7, Auth::id(), 0, 'bipro');
-        $type_lesson_id = $new_comment->questionLesson->type_lesson_id;
-        $level_lesson_id = $new_comment->questionLesson->typeQuestion->levelLesson->level;
-        dd($level_lesson_id);
+        $readingNotificationService = new ReadingNotificationService();
+//        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson($question_custom_id, $user_id, $reply_comment_id, $content_cmt);
+        $related_admins = $readingQuestionAnswerLessonService->getAllRelatedAdmins(8);
+        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(8, 1, 30, 'ahhihihihiihi');
+        $list_notifications = $readingNotificationService->pushCommentNotification($new_comment);
+        dd($list_notifications);
+        return 'dsaddas';
     }
 
     public function testEvent(){
-        Auth::user()->unreadNotifications->where('id', '00f17a9f-8dd1-43e2-a53c-fa261f5f9e19')->markAsRead();
+        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
+        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(8, 1, 30, 'ahhihihihiihi');
+        event(new CommentNotificationEvent('dsad', 'dsad', 'dsad 1', 'logo', $new_comment, 1, time()));
         return "Message has been sent.";
     }
 
-    public function pusherAuth() {
+    public function getNotification() {
+        $readingNotificationService = new ReadingNotificationService();
+        $list_notifications = $readingNotificationService->getAllNotifications();
+        return json_encode(['list_notis' => $list_notifications]);
+    }
 
-        if ( Auth::user() )
-        {
-            $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'));
-            $socket_id = $_POST['socket_id'];
-            $channel_name = $_POST['channel_name'];
-            echo $pusher->presence_auth($_POST['channel_name'], $_POST['socket_id'], Auth::id());
-        }
-        else
-        {
-            header('', true, 403);
-            echo( "Forbidden" );
-        }
+    public function readNotification($domain, $id) {
+        $readingNotificationService = new ReadingNotificationService();
+        $result = $readingNotificationService->markAsReadNotification($id);
+        return json_encode(['ok' => $result]);
+    }
 
+    public function markAllNotificationAsRead() {
+        $readingNotificationService = new ReadingNotificationService();
+        $result = $readingNotificationService->markAllAsReadNotification();
+        return json_encode(['ok' => $result]);
     }
 }

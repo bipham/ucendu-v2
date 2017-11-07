@@ -3,4 +3,5 @@
  */
 $(document).ready( function () {
     $('#reading-list-lesson').DataTable();
+    $('#reading-list-comment').DataTable();
 } );

@@ -47,6 +47,7 @@
 @endsection
 
 @section('scripts')
+    <script src="{{asset('public/js/client/readingCommentFunctions.js')}}"></script>
     <script src="{{asset('public/js/client/readingSolutionDetail.js')}}"></script>
     <script src="{{asset('public/libs/chart/Chart.min.js')}}"></script>
     <script type="text/javascript">

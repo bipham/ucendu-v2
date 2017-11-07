@@ -54,5 +54,5 @@
     <script src="{{asset('public/js/admin/adminGetDataFunctions.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/js/admin/readingListLesson.js')}}"></script>
     <script type="text/javascript" src="{{asset('public/libs/DataTables/datatables.min.js')}}"></script>
-    <script type="text/javascript" src="{{asset('public/js/admin/readingManagerLessonTables.js')}}"></script>
+    <script type="text/javascript" src="{{asset('public/js/admin/readingTables.js')}}"></script>
 @endsection
