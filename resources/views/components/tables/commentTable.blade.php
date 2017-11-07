@@ -61,7 +61,7 @@ $home_url = 'http://' . $host_names;
             <td class="edit-comment-center">
                 <button type="button" class="btn btn-success btn-admin-custom btn-set-comment-public" data-id="{!! $comment['id'] !!}" data-question-id="{!! $comment['question_custom_id'] !!}" data-reply-id="{!! $comment['reply_comment_id'] !!}" onclick="setPublicReadingComment({!! $comment['id'] !!})" @if($comment['private'] == 0) disabled @endif>Set public</button>
                 <button type="button" class="btn btn-warning btn-admin-custom btn-set-comment-private" data-id="{!! $comment['id'] !!}" data-question-id="{!! $comment['question_custom_id'] !!}" data-reply-id="{!! $comment['reply_comment_id'] !!}" onclick="setPrivateReadingComment({!! $comment['id'] !!})" @if($comment['private'] == 1) disabled @endif>Set private</button>
-                <button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="{!! $comment['id'] !!}" data-question-id="{!! $comment['question_custom_id'] !!}" data-reply-id="{!! $comment['reply_comment_id'] !!}" onclick="deleteReadingComment({!! $comment['id'] !!})">Del</button>
+                {{--<button type="button" class="btn btn-danger btn-admin-custom btn-del-lesson" data-id="{!! $comment['id'] !!}" data-question-id="{!! $comment['question_custom_id'] !!}" data-reply-id="{!! $comment['reply_comment_id'] !!}" onclick="deleteReadingComment({!! $comment['id'] !!})">Del</button>--}}
             </td>
         </tr>
     @endforeach

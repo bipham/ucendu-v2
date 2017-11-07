@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Services\ReadingQuestionAnswerLessonService;
 use App\Services\ReadingNotificationService;
 use App\Events\CommentNotificationEvent;
+use App\Services\UcenduUserService;
 
 class ReadingNotificationController extends Controller
 {
@@ -16,13 +17,10 @@ class ReadingNotificationController extends Controller
     public function fireEvent(){
 //        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
 //        $list_notifications = $readingQuestionAnswerLessonService->getAllComments();
-        $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
-        $readingNotificationService = new ReadingNotificationService();
-//        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson($question_custom_id, $user_id, $reply_comment_id, $content_cmt);
-        $related_admins = $readingQuestionAnswerLessonService->getAllRelatedAdmins(8);
-        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(8, 1, 30, 'ahhihihihiihi');
-        $list_notifications = $readingNotificationService->pushCommentNotification($new_comment);
-        dd($list_notifications);
+        $ucenduUserService = new UcenduUserService();
+//        $related_admins = $readingQuestionAnswerLessonService->getAllRelatedAdmins($question_custom_id);
+        $all_admins = $ucenduUserService->getAllAdmins();
+        dd($all_admins);
         return 'dsaddas';
     }
 

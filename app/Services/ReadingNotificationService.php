@@ -26,8 +26,9 @@ class ReadingNotificationService {
                 //Push notification:
                 $title = 'New comment from UCENDU!';
                 $message = $comment['username'] . " just replied a comment that you follow!";
+                $total_notifications = count($user_received->unreadNotifications);
 //                $url = '/reading/' . $level_lesson . '-level/readingViewSolutionLesson/' . $type_lesson_id . '-' . $lesson_id . 'lesson?question=' . $comment->question_custom_id . '&comment=' . $comment->id;
-                event(new CommentNotificationEvent($title, $message, $comment['username'], $comment['avatar'], $comment, $related_user->user_id, time()));
+                event(new CommentNotificationEvent($title, $message, $comment['username'], $comment['avatar'], $comment, $related_user->user_id, $total_notifications, time()));
             }
         }
     }

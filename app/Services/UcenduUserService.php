@@ -25,6 +25,14 @@ class UcenduUserService
 
     public function getLevelCurrentUser() {
         return $this->_readingUserModel->getLevelCurrentUser($this->_adminId);
-}
+    }
+
+    public function getAllAdmins() {
+        $all_admins = $this->_readingUserModel->getAllAdmins();
+        foreach ($all_admins as $index => $admin) {
+            $all_admins[$index]->user_id = $admin->id;
+        }
+        return $all_admins;
+    }
 }
 ?>

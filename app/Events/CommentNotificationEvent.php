@@ -26,9 +26,10 @@ class CommentNotificationEvent implements ShouldBroadcast
     public $avatar;
     public $comment;
     public $room;
+    public $total_notifications;
     public $time_code;
 
-    public function __construct($title, $message, $username, $avatar, $comment, $room, $time_code)
+    public function __construct($title, $message, $username, $avatar, $comment, $room, $total_notifications, $time_code)
     {
         $this->title = $title;
         $this->message = $message;
@@ -36,6 +37,7 @@ class CommentNotificationEvent implements ShouldBroadcast
         $this->avatar = $avatar;
         $this->comment = $comment;
         $this->room = $room;
+        $this->total_notifications = $total_notifications;
         $this->time_code = $time_code;
     }
 

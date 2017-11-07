@@ -60,4 +60,8 @@ class User extends Authenticatable
     public function getLevelCurrentUser($user_id) {
         return $this->where('id', $user_id)->where('status', 1)->select('id', 'level_user_id')->get()->first();
     }
+
+    public function getAllAdmins() {
+        return $this->where('status', 1)->where('level_user_id', 1)->select('id')->get()->all();
+    }
 }

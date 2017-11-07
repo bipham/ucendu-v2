@@ -22,8 +22,14 @@ socket_public.on('insert-new-comment', function (data) {
 });
 
 socket_public.on('comment-notication', function (data) {
+    updateTotalNotifications(data.total_notifications);
     notifyMe(data);
 });
+
+//function update total notifications:
+function updateTotalNotifications(total_notifications) {
+    $('.total-noti').html(total_notifications);
+}
 
 //function add message
 function addMessageDemo(data) {
