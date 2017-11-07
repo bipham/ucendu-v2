@@ -12,6 +12,11 @@ class ReadingMiniTestLesson extends Model
 
     public $timestamps = true;
 
+    public function questionLessons()
+    {
+        return $this->hasMany('App\Models\ReadingQuestionLesson', 'lesson_id');
+    }
+
     public function typeQuestion()
     {
         return $this->belongsTo('App\Models\ReadingTypeQuestion', 'type_question_id');

@@ -15,7 +15,7 @@
  *                  ROUTE FOR PUBLIC
  *
  *********************************************************/
-Route::pattern('nameDomain', '(www.ucendu-v2.dev|ucendu-v2.dev|www.ucendu-v2.com|ucendu-v2.com|www.ucendu-v2.vn|ucendu-v2.vn)');
+Route::pattern('nameDomain', '(www.ucendu.dev|ucendu.dev|www.ucendu.com|ucendu.com|www.ucendu.vn|ucendu.vn)');
 // Authentication routes...
 Route::get('login', ['as'=>'getLogin', 'uses' => 'Auth\LoginController@getLogin']);
 Route::post('login',['as'=>'postLogin','uses'=>'Auth\LoginController@postLogin']);

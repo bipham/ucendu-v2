@@ -10,7 +10,7 @@
 <ul class="navbar-nav navbar-custom-header primary-header-custom navbar-info-custom" id="userNotiAction" data-user-id="{!! Auth::id() !!}">
         <?php
     $user = Auth::user();
-    //        dd($user->notifications);
+    $total_notifications = count($user->unreadnotifications);
         ?>
             <li class="dropdown dropdown-custom open img-status-header">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,9 +29,9 @@
         <li class="notification-status img-status-header">
                 <i class="fa fa-globe noti-status img-status-custom" aria-hidden="true"></i>
                 <span class="print-number-noti">
-                    {{--@if($totalNoti != 0)--}}
-                        <sup class="total-noti">2</sup>
-                    {{--@endif--}}
+                    @if($total_notifications != 0)
+                        <sup class="total-noti">{!! $total_notifications !!}</sup>
+                    @endif
             </span>
                 <div id="notifications-container-menu">
                     <div class="notifications-header">
@@ -45,7 +45,7 @@
                                 @if ($notification->read_at != null)
                                 <br />Read at: {!!  $notification->read_at!!}
                                 @else
-                                    <br /> unread!
+                                    <br /> {!! snake_case(class_basename($notification->type)) !!}
                                 @endif
                                 @endforeach
                             </div>

@@ -12,9 +12,34 @@ class ReadingQuestionLesson extends Model
 
     public $timestamps = true;
 
+    public function questionAnswers()
+    {
+        return $this->hasMany('App\Models\ReadingQuestionAndAnswerLesson.php', 'question_custom_id', 'question_custom_id');
+    }
+
     public function typeQuestion()
     {
         return $this->belongsTo('App\Models\ReadingTypeQuestion', 'type_question_id');
+    }
+
+    public function practiceLesson()
+    {
+        return $this->belongsTo('App\Models\ReadingPracticeLesson', 'lesson_id');
+    }
+
+    public function miniTest()
+    {
+        return $this->belongsTo('App\Models\ReadingMiniTestLesson', 'lesson_id');
+    }
+
+    public function mixTest()
+    {
+        return $this->belongsTo('App\Models\ReadingMixTestLesson', 'lesson_id');
+    }
+
+    public function fullTest()
+    {
+        return $this->belongsTo('App\Models\ReadingFullTestLesson', 'lesson_id');
     }
 
     public function typeLesson()

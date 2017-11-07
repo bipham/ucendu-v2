@@ -17,6 +17,16 @@ class ReadingLevelLesson extends Model
         return $this->hasMany('App\Models\ReadingTypeQuestion', 'level_lesson_id');
     }
 
+    public function mixTests()
+    {
+        return $this->hasMany('App\Models\ReadingMixTestLesson', 'level_lesson_id');
+    }
+
+    public function fullTests()
+    {
+        return $this->hasMany('App\Models\ReadingFullTestLesson', 'level_lesson_id');
+    }
+
     public function createNewLevelLesson($level, $admin_responsibility) {
         if ($this->where('level', '=', $level)->exists()) {
             // level found

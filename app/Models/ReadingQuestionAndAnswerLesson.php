@@ -13,6 +13,11 @@ class ReadingQuestionAndAnswerLesson extends Model
 
     public $timestamps = true;
 
+    public function questionLesson()
+    {
+        return $this->belongsTo('App\Models\ReadingQuestionLesson', 'question_custom_id', 'question_custom_id');
+    }
+
     public function getAllCommentsByQuestionCustomId($question_custom_id) {
         return DB::table('reading_question_and_answer_lessons')
                     ->rightJoin('users', 'users.id', '=', 'reading_question_and_answer_lessons.user_id')

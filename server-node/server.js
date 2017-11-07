@@ -10,7 +10,7 @@ console.log('Server running port: 8890 ...');
 current_sockets = [];
 last_time_noti = {};
 io.origins((origin, callback) => {
-    if (origin !== 'http://ucendu-v2.dev') {
+    if (origin !== 'http://ucendu.dev') {
         console.log('origin not allowed: ' + origin);
         // io.close(); // Close current server
         return callback('origin not allowed', false);

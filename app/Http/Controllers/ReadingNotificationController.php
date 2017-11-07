@@ -19,20 +19,14 @@ class ReadingNotificationController extends Controller
     }
     public function fireEvent(){
         $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
-        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(8, Auth::id(), 30, 'bi pro');
-        dd($new_comment);
+        $new_comment = $readingQuestionAnswerLessonService->createNewCommentLesson(7, Auth::id(), 0, 'bipro');
+        $type_lesson_id = $new_comment->questionLesson->type_lesson_id;
+        $level_lesson_id = $new_comment->questionLesson->typeQuestion->levelLesson->level;
+        dd($level_lesson_id);
     }
 
     public function testEvent(){
-        // $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
-        // $related_users = $readingQuestionAnswerLessonService->getAllRelatedUser(7);
-        $users = \App\User::all();
-// dd($related_users);
-        foreach ($users as $this_user) {
-            if ($this_user->id != Auth::id()) {
-                event(new TestCommentEvent("Hi, I'm " . Auth::user()->username . " send message to " . $this_user->username . "!", Auth::user(), $this_user->id, time()));
-            }
-        }
+        Auth::user()->unreadNotifications->where('id', '00f17a9f-8dd1-43e2-a53c-fa261f5f9e19')->markAsRead();
         return "Message has been sent.";
     }
 

@@ -12,6 +12,16 @@ class ReadingMixTestLesson extends Model
 
     public $timestamps = true;
 
+    public function levelLesson()
+    {
+        return $this->belongsTo('App\Models\ReadingLevelLesson', 'level_lesson_id');
+    }
+
+    public function questionLessons()
+    {
+        return $this->hasMany('App\Models\ReadingQuestionLesson', 'lesson_id');
+    }
+
     public function levelUser()
     {
         return $this->belongsTo('App\Models\ReadingLevelUser', 'level_user_id');

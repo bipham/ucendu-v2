@@ -17,13 +17,23 @@ class CommentNotification extends Notification
      * @return void
      */
 
-    public $comment;
-    public $user;
+    public $avatar;
+    public $username;
+    public $lesson_id;
+    public $title_lesson;
+    public $type_question;
+    public $level_lesson;
+    public $level_lesson_id;
 
-    public function __construct($comment, $user)
+    public function __construct($avatar, $username, $lesson_id, $title_lesson, $type_question, $level_lesson, $level_lesson_id)
     {
-        $this->comment = $comment;
-        $this->user = $user;
+        $this->avatar = $avatar;
+        $this->username = $username;
+        $this->lesson_id = $lesson_id;
+        $this->title_lesson = $title_lesson;
+        $this->type_question = $type_question;
+        $this->level_lesson = $level_lesson;
+        $this->level_lesson_id = $level_lesson_id;
     }
 
     public function via($notifiable)
@@ -34,8 +44,13 @@ class CommentNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'comment' => $this->comment,
-            'user'=> $this->user
+            'avatar' => $this->avatar,
+            'username' => $this->username,
+            'lesson_id' => $this->lesson_id,
+            'title_lesson' => $this->title_lesson,
+            'type_question' => $this->type_question,
+            'level_lesson' => $this->level_lesson,
+            'level_lesson_id'=> $this->level_lesson_id
         ];
     }
 
