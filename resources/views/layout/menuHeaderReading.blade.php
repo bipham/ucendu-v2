@@ -27,8 +27,8 @@
                 </div>
                 <div class="badge badge-danger countdown-time"></div>
             </div>
-            <div class="pull-right action-user-center-fixed">
-                {{--@include('utils.actionCenterUser')--}}
+            <div class="col-md-4 action-user-center-fixed">
+                @include('utils.actionCenterUser')
             </div>
         </div>
     </div>

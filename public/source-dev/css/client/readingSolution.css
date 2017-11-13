@@ -400,6 +400,10 @@ input.reply-sub-cmt {
     background: rgba(233, 235, 238, 0.25);
 }
 
+.row.list-answered {
+    margin: 0;
+}
+
 .explanation-column {
     width: calc(100%/3);
     background: #fff;

@@ -13,6 +13,7 @@ footer.footer-navigation-fixed {
     background-color: #152B39;
     color: #fff;
     z-index: 9999;
+    margin: 0;
 }
 
 .main.main-page {

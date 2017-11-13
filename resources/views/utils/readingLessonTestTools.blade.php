@@ -18,7 +18,7 @@
         <i class="fa fa-info icon-reading-tool-sidebar" aria-hidden="true"></i>
     </button>
 
-    <a href="{{url('/reading/readingViewSolutionLesson/' . $lesson->id . '-' . $lesson->id)}}" class="btn btn-success btn-tool-sidebar  btn-test-overview">
+    <a href="{{url('/reading/' . $level_lesson_id . '-level/readingViewSolutionLesson/' . $type_lesson_id . '-' . $lesson->id)}}" class="btn btn-success btn-tool-sidebar  btn-test-overview">
         Solution
         <i class="fa fa-key icon-reading-tool-sidebar" aria-hidden="true"></i>
     </a>

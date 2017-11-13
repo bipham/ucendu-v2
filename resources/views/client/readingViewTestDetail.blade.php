@@ -23,7 +23,6 @@
 @endsection
 
 @section('content')
-    @include('utils.readingLessonTestTools',['lesson' => $lesson])
     <div class="container lesson-detail-page page-custom" data-level-lesson-id="{!! $level_lesson_id !!}" data-type-lesson-id="{!! $type_lesson_id !!}" data-type-question-id="{!! $type_question_id_current !!}>
         <input type="hidden" name="_token" value="{!!csrf_token()!!}">
         <div class="overlay-lesson">
