@@ -57,4 +57,20 @@ class ReadingMixTestLesson extends Model
     public function getAllOrderMixTestByLevelLessonId($level_lesson_id) {
         return $this->where('level_lesson_id', $level_lesson_id)->where('status', 1)->orderBy('order_lesson','asc')->select('order_lesson')->get()->all();
     }
+
+    public function getAllMixTestLessons($level_lesson_id) {
+        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->orderBy('order_lesson', 'asc')->select('id', 'title', 'level_user_id', 'order_lesson', 'limit_time', 'total_questions')->get()->all();
+    }
+
+    public function getDetailMixTestForClientTest($lesson_id) {
+        return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'level_lesson_id', 'content_lesson', 'content_quiz', 'total_questions', 'limit_time')->get()->first();
+    }
+
+    public function getTotalQuestionOfMixTestLesson($lesson_id) {
+        return $this->where('id', $lesson_id)->select('total_questions')->get()->first();
+    }
+
+    public function getDetailMixTestForClientSolution($lesson_id) {
+        return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'content_highlight', 'content_answer_quiz', 'total_questions')->get()->first();
+    }
 }

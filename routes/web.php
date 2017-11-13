@@ -134,7 +134,7 @@ Route::group(['domain'=>'{nameDomain}', 'middleware' => ['clientAuth']], functio
     //For Reading English:
     Route::group(['prefix'=>'reading/{level_id}'],function () {
         Route::get('',['as'=>'reading/{level_id}','uses'=>'Client\ReadingLessonController@index']);
-        Route::get('readingLesson/{type_lesson_id}/{lesson_id}',                array('as'=>'reading.readingLesson',            'uses'=>'Client\ReadingLessonController@readingLessonDetail'));
+        Route::get('readingLesson/{type_lesson_id}/{lesson_id}',['as'=>'reading.readingLesson','uses'=>'Client\ReadingLessonController@readingLessonDetail']);
         Route::get('getResultReadingLesson/{type_lesson_id}-{lesson_id}',['as'=>'getResultReadingLesson','uses'=>'Client\ReadingResultController@getResultReadingLesson']);
         Route::get('readingViewResultLesson/{type_lesson_id}-{lesson_id}',['as'=>'readingViewResultLesson','uses'=>'Client\ReadingResultController@getReadingViewResultLesson']);
         Route::get('readingViewSolutionLesson/{type_lesson_id}-{lesson_id}',['as'=>'readingViewSolutionLesson','uses'=>'Client\ReadingResultController@getReadingViewSolutionLesson']);

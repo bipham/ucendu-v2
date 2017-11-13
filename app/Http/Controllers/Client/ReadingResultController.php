@@ -52,13 +52,30 @@ class ReadingResultController extends Controller
             $type_question_id_current = $lesson->type_question_id;
         }
         $readingStatusLearningOfUserService->checkNextStepLesson($level_lesson_id, $type_lesson_id, $type_question_id_current, $correct_answer, $total_questions, $step_lesson_current);
-
         $title_current_step = $lesson->title;
-        if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
-            return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
-        }
-        else {
-            return abort(404);
+        switch ($type_lesson_id) {
+            case 1:
+                if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
+                    return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                }
+                else {
+                    return abort(404);
+                }
+                break;
+            case 2:
+                if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
+                    return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                }
+                else {
+                    return abort(404);
+                }
+                break;
+            case 3:
+                return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                break;
+            case 4:
+                return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                break;
         }
     }
 

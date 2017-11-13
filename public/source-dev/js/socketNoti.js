@@ -5,14 +5,6 @@
 var baseUrl = document.location.origin;
 var user_id = current_user_id;
 var public_connect = baseUrl + ':8890?user_id=' + user_id;
-var one_signal_user_id = 0;
-OneSignal.push(function() {
-    /* These examples are all valid */
-    OneSignal.getUserId(function (userId) {
-        console.log("OneSignal User ID:", userId);
-        one_signal_user_id = userId;
-    });
-});
 
 var socket_public = io.connect(public_connect);
 socket_public.emit('updateSocket', user_id);

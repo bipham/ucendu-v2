@@ -20,7 +20,7 @@
 @endsection
 
 @section('typeLessonHeader')
-    {!! $lesson->typeQuestion->name !!}
+    {{--{!! $lesson->typeQuestion->name !!}--}}
 @endsection
 
 @section('content')

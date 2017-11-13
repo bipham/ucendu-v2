@@ -25,6 +25,7 @@
                     </h4>
                     @yield('typeLessonHeader')
                 </div>
+                <div class="badge badge-danger countdown-time"></div>
             </div>
             <div class="pull-right action-user-center-fixed">
                 {{--@include('utils.actionCenterUser')--}}

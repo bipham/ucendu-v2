@@ -178,7 +178,7 @@ class ReadingLessonService {
                 $result = $this->_readingMiniTestLessonModel->getTheLastLessonId();
                 break;
             case 3:
-                $result = $this->_readingMixTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingMixTestLessonModel->getDetailMixTestForClientTest($lesson_id);
                 break;
             case 4:
                 $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
@@ -196,7 +196,7 @@ class ReadingLessonService {
                 $result = $this->_readingMiniTestLessonModel->getTheLastLessonId();
                 break;
             case 3:
-                $result = $this->_readingMixTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingMixTestLessonModel->getDetailMixTestForClientSolution($lesson_id);
                 break;
             case 4:
                 $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
@@ -247,7 +247,7 @@ class ReadingLessonService {
                 $result = $this->_readingPracticeLessonModel->getPracticesByTypeQuestionId($type_question_id);
                 break;
             case 2:
-                $result = $this->_readingMiniTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingMiniTestLessonModel->getMiniTestByTypeQuestionId($type_question_id);
                 break;
             case 3:
                 $result = $this->_readingMixTestLessonModel->getTheLastLessonId();
@@ -283,10 +283,10 @@ class ReadingLessonService {
                 $result = $this->_readingPracticeLessonModel->getTotalQuestionOfPracticeLesson($lesson_id);
                 break;
             case 2:
-                $result = $this->_readingMiniTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingMiniTestLessonModel->getTotalQuestionOfMiniTestLesson($lesson_id);
                 break;
             case 3:
-                $result = $this->_readingMixTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingMixTestLessonModel->getTotalQuestionOfMixTestLesson($lesson_id);
                 break;
             case 4:
                 $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
@@ -319,7 +319,7 @@ class ReadingLessonService {
                 $level_user_of_lesson = $this->_readingPracticeLessonModel->checkVipPracticeLesson($lesson_id);
                 break;
             case 2:
-                $level_user_of_lesson = $this->_readingMiniTestLessonModel->getTheLastLessonId();
+                $level_user_of_lesson = $this->_readingMiniTestLessonModel->checkVipMiniTestLesson($lesson_id);
                 break;
             case 3:
                 $level_user_of_lesson = $this->_readingMixTestLessonModel->getTheLastLessonId();

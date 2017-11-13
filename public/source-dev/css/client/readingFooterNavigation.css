@@ -1,4 +1,5 @@
 .nav-left-menu {
+    z-index: 999999;
     overflow: auto;
     font-size: 12px;
     font-weight: 200;
@@ -9,7 +10,6 @@
     width: 500px;
     height: calc(100vh - 50px);
     color: #e1ffff;
-    z-index: 9999;
 }
 .transform-left-custom-active {
     left: 0;
@@ -243,4 +243,12 @@
 .item-lesson:hover .link-solution-lesson {
     display: inline-block;
     margin: 0 5px;
+}
+
+.show-lesson-area {
+    margin-bottom: 20px;
+}
+
+.primary-menu {
+    padding: 0;
 }

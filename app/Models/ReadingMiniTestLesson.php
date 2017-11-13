@@ -31,6 +31,10 @@ class ReadingMiniTestLesson extends Model
         return $this->select('id')->orderBy('id', 'desc')->first();
     }
 
+    public function getTotalQuestionOfMiniTestLesson($lesson_id) {
+        return $this->where('id', $lesson_id)->select('total_questions')->get()->first();
+    }
+
     public function addNewMiniTest($title, $level_user_id, $content_lesson, $content_highlight, $image_feature, $content_quiz, $content_answer_quiz, $total_questions, $order_lesson, $type_question_id, $limit_time, $admin_responsibility) {
         if ($this->where('type_question_id', $type_question_id)->where('order_lesson', $order_lesson)->exists()) {
             return 'fail-order';
@@ -60,5 +64,13 @@ class ReadingMiniTestLesson extends Model
 
     public function getAllMiniTest() {
         return $this->where('status',1)->orderBy('updated_at','desc')->select('id', 'title', 'level_user_id', 'image_feature', 'order_lesson', 'type_question_id')->get()->all();
+    }
+
+    public function getMiniTestByTypeQuestionId($type_question_id) {
+        return $this->where('status',1)->where('type_question_id', $type_question_id)->orderBy('order_lesson','asc')->select('id', 'title', 'level_user_id', 'image_feature', 'order_lesson', 'total_questions', 'limit_time')->get()->all();
+    }
+
+    public function checkVipMiniTestLesson($lesson_id) {
+        return $this->where('id', $lesson_id)->select('level_user_id')->get()->first();
     }
 }
