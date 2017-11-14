@@ -275,6 +275,7 @@
 
 @section('scripts')
     <script src="{{asset('public/js/admin/adminCreateNewItemFunctions.js')}}"></script>
+    <script src="{{asset('public/js/client/readingCommentFunctions.js')}}"></script>
     <script src="{{asset('public/js/admin/adminGetDataFunctions.js')}}"></script>
     <script src="{{asset('public/js/admin/readingUploadNewLesson.js')}}"></script>
     <script src="{{asset('public/js/client/readingSolutionDetail.js')}}"></script>

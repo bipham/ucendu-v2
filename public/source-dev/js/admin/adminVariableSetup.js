@@ -18,3 +18,19 @@ var value_radio_option = 'A';
 var in_question = false;
 var in_radio_question = false;
 var in_checkbox_question = false;
+var html_table = '<table border="1" cellpadding="1" cellspacing="1" style="width:100%;">' +
+                    '<tbody>' +
+                        '<tr>' +
+                            '<td>Words in question</td>' +
+                            '<td>Similar words in passage</td>' +
+                        '</tr>' +
+                        '<tr>' +
+                            '<td>' +
+                                '<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>' +
+                            '</td>' +
+                            '<td>' +
+                                '<p>&nbsp;</p>' +
+                            '</td>' +
+                        '</tr>' +
+                    '</tbody>' +
+                '</table>';

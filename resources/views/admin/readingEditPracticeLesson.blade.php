@@ -198,6 +198,7 @@
 
 @section('scripts')
     <script src="{{asset('public/js/admin/readingEditLesson.js')}}"></script>
+    <script src="{{asset('public/js/client/readingCommentFunctions.js')}}"></script>
     <script src="{{asset('public/js/admin/readingEditPracticeFunctions.js')}}"></script>
     <script src="{{asset('public/js/admin/readingHighlight.js')}}"></script>
     <script src="{{asset('public/js/client/readingSolutionDetail.js')}}"></script>

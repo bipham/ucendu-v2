@@ -242,7 +242,12 @@ $( document ).ready(function() {
                     }
                     if (jQuery.inArray(qnumber, listAnswer_source) == -1) {
                         $('input.answer-q[data-qnumber=' + qnumber + ']').val(listAnswer_source[qnumber]);
-                        CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
+                        if (listKeyword_source[qnumber] == '' || listKeyword_source[qnumber] == undefined || listKeyword_source[qnumber] == null) {
+                            CKEDITOR.instances['input_explanation_' + qnumber].setData(html_table);
+                        }
+                        else {
+                            CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
+                        }
                         $('.enter-type-question select[data-qnumber=' + qnumber + ']').val(list_type_questions_source[qnumber]);
                     }
                 });

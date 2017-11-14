@@ -152,7 +152,12 @@ $( document ).ready(function() {
                     }
                     if (jQuery.inArray(qnumber, listAnswer_source) == -1) {
                         $('input.answer-q[data-qnumber=' + qnumber + ']').val(listAnswer_source[qnumber]);
-                        CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
+                        if (listKeyword_source[qnumber] == '' || listKeyword_source[qnumber] == undefined || listKeyword_source[qnumber] == null) {
+                            CKEDITOR.instances['input_explanation_' + qnumber].setData(html_table);
+                        }
+                        else {
+                            CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
+                        }
                     }
                 });
             }
@@ -333,10 +338,6 @@ function checkStepAnswer() {
 $(document).on("change", "input.answer-q",function() {
     var qnumber = $(this).data('qnumber');
     listAnswer_source[qnumber] = $(this).val();
-});
-
-editor.on('change', function() {
-    alert("TEST");
 });
 
 $(document).on("change", ".input-keyword",function() {
