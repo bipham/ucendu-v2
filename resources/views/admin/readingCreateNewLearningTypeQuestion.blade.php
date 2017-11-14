@@ -37,6 +37,7 @@
                         Chon dạng câu hỏi!
                     </label>
                     <select class="form-control" id="list_type_questions" name="list_type_questions" onchange="getAllTypeQuestionByLevelLessonId()">
+                        <option value="-{!! $all_levels[0]->id !!}">All Of Types</option>
                         @foreach($all_type_questions as $type_question)
                             <option value="{!! $type_question->id !!}">{!! $type_question->name !!}</option>
                         @endforeach

@@ -16,7 +16,7 @@ class CreateReadingQuestionLearningsTable extends Migration
         Schema::create('reading_question_learnings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('learning_type_question_id')->unsigned();
-            $table->integer('type_question_id')->unsigned();
+            $table->tinyInteger('type_question_id');
             $table->integer('question_custom_id')->unique();
             $table->string('answer');
             $table->text('keyword')->nullable();

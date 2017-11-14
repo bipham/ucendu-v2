@@ -42,6 +42,7 @@ $( document ).ready(function() {
             data: { level_lesson_id: level_lesson_id },
             success: function (data) {
                 $('#list_type_questions').empty();
+                $('#list_type_questions').append('<option value="' + -level_lesson_id + '">All Of Type</option>');
                 $.each(data.list_type_questions, function (index, type_question) {
                     $('#list_type_questions').append('<option value="' + type_question.id + '">' + type_question.name + '</option>');
                 })
@@ -73,17 +74,6 @@ $( document ).ready(function() {
                 listKeyword = 'null';
                 list_type_questions = 'null';
             }
-            console.log('list_answer: ' + JSON.stringify(listAnswer));
-            console.log('list_type_questions: ' + JSON.stringify(list_type_questions));
-            console.log('listKeyword: ' + JSON.stringify(listKeyword));
-            console.log('type_question_id: ' + type_question_id);
-            console.log('view_layout: ' + view_layout);
-            console.log('step_section: ' + step_section);
-            console.log('title_section: ' + title_section);
-            console.log('name_icon_section: ' + name_icon_section);
-            console.log('content_section: ' + content_section);
-            console.log('left_section: ' + left_section);
-            console.log('right_section: ' + right_section);
             $.ajax({
                 type: "POST",
                 url: ajaxFinishCreateNewLearningOfTypeQuestion,

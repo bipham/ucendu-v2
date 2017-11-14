@@ -15,7 +15,7 @@ class CreateReadingLearningTypeQuestionsTable extends Migration
     {
         Schema::create('reading_learning_type_questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type_question_id')->unsigned();
+            $table->tinyInteger('type_question_id');
 //            $table->foreign('type_question_id')->references('id')->on('reading_type_questions')->onDelete('cascade');
             $table->string('title_section');
             $table->integer('step_section');

@@ -28,6 +28,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 
     config.toolbar = [
+        { name: 'document', items: [ 'Source' ] },
         { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-'] },
         { name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
         { name: 'insert', items: [ 'Image', 'Html5video', 'Table', 'HorizontalRule'] },
@@ -37,4 +38,5 @@ CKEDITOR.editorConfig = function( config ) {
         '/',
         { name: 'others', items: [ 'checkbox_quiz', 'select_quiz', 'input_quiz', 'radio_quiz' ] }
     ];
+
 };

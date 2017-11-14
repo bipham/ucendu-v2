@@ -21,7 +21,7 @@
         $current_level_lesson = $readingLevelLessonService->getLevelLessonById($level_lesson_id);
         $all_lessons = $readingTypeQuestionService->getAllTypeQuestionById($level_lesson_id);
         $mix_tests = $readingMixTestService->getAllMixTestLessons($level_lesson_id);
-        //        dd($all_lessons);
+        $all_introductions = $readingLearningTypeQuestionService->getLearningOfTypeQuestion(-$level_lesson_id);
         ?>
         <div class="header-left-menu">
             <div class="center-class logo-website-left-menu">
@@ -53,6 +53,29 @@
                 </div>
             </div>
             <ul id="menu-content" class="menu-content">
+                {{--Show Introductions--}}
+                <div class="introduction-area show-lesson-area">
+                    <h6 class="title-menu" data-toggle="collapse" data-target="#introduction" aria-expanded="false">
+                        <a href="#">Introduction</a>
+                    </h6>
+                    <ul class="primary-menu collapse @if($type_lesson_id < 0) show type-current @endif" id="introduction">
+                        @foreach($all_introductions as $key_introduction => $introduction)
+                            <li class="item-lesson level-one @if($introduction->id == $lesson_id_current) current-step @endif">
+                                <span class="pull-left title-lesson-menu">
+                                    <a href="{{url('/reading/' . $current_level_lesson->id . '-level/readingLesson/' . config('constants.type_lesson.mix_test') . '-mix_test/' . $introduction->id . '-mix_test')}}">
+                                        {!! $key_introduction + 1 !!}. {!! $introduction->title_section !!}
+                                    </a>
+                                </span>
+                                <span class="pull-right tools-area-menu">
+                                    <a href="{{url('/reading/'. $current_level_lesson->id . '-level/readingViewSolutionLesson/' . config('constants.type_lesson.mix_test')  . 'mix_test-' . $introduction->id . $introduction->title_section)}}" class="badge badge-success link-solution-lesson">
+                                        <i class="fa fa-key" aria-hidden="true"></i> Solution
+                                    </a>
+                                </span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+
                 {{--Show Lesson--}}
                 <div class="lesson-area show-lesson-area">
                     <h6 class="title-menu" data-toggle="collapse" data-target="#lessons" aria-expanded="true">

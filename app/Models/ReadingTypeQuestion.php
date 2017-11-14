@@ -53,6 +53,6 @@ class ReadingTypeQuestion extends Model
     }
 
     public function getAllTypeQuestionById($level_lesson_id) {
-        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->get();
+        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->select('name', 'id')->get();
     }
 }

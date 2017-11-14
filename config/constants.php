@@ -12,5 +12,10 @@ return [
         'mini_test' => 2,
         'mix_test' => 3,
         'full_test' => 4,
+    ],
+    'type_question_of_level' => [
+        'basic' => -1,
+        'intermediate' => -2,
+        'advanced' => -3,
     ]
 ];
