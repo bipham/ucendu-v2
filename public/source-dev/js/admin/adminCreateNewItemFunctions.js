@@ -87,7 +87,7 @@ function checkStepAnswer() {
         var qorder = $(this).attr('name');
         qorder = qorder.match(/\d+/);
         var answer_key = $('.answer-' + qorder).val().trim();
-        var keywords_key = $('.keyword-' + qorder).val();
+        var keywords_key = CKEDITOR.instances['input_explanation_' + qnumber].getData();
         if (answer_key != '') {
             listAnswer[qnumber] = answer_key;
         }
@@ -130,9 +130,9 @@ $(document).on("change", "input.answer-q",function() {
     listAnswer_source[qnumber] = $(this).val();
 });
 
-$(document).on("change", "textarea.input-keyword",function() {
+$(document).on("change", ".input-keyword",function() {
     var qnumber = $(this).data('qnumber');
-    listKeyword_source[qnumber] = $(this).val();
+    listKeyword_source[qnumber] = CKEDITOR.instances['input_explanation_' + qnumber].getData();
     if (listKeyword_source[qnumber] == '') {
         listClassKeyword[qnumber] = 'hidden-class';
     }

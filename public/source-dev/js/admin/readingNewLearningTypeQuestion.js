@@ -25,9 +25,11 @@ $( document ).ready(function() {
         view_layout = $(this).val().trim();
         if (view_layout == 2) {
             $('.two-layout-content').removeClass('hidden');
+            $('.first-layout-content').addClass('hidden');
         }
         else {
             $('.two-layout-content').addClass('hidden');
+            $('.first-layout-content').removeClass('hidden');
         }
     });
 
@@ -169,13 +171,14 @@ $( document ).ready(function() {
                         '</div>' +
                         '<div class="enter-keyword row-enter-custom">' +
                         '<div class="title-row-enter">Keyword ' + qorder + ': </div>' +
-                        '<textarea class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
+                        '<textarea id="input_explanation_' + qnumber + '" class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
                         '</div>' +
                         '</div>');
+                    CKEDITOR.replace( 'input_explanation_' + qnumber);
                 }
                 if (jQuery.inArray(qnumber, listAnswer_source) == -1) {
                     $('input.answer-q[data-qnumber=' + qnumber + ']').val(listAnswer_source[qnumber]);
-                    $('textarea.input-keyword[data-qnumber=' + qnumber + ']').val(listKeyword_source[qnumber]);
+                    CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
                     $('.enter-type-question select[data-qnumber=' + qnumber + ']').val(list_type_questions_source[qnumber]);
                 }
             });
@@ -214,7 +217,7 @@ function checkStepAnswer() {
         var qorder = $(this).attr('name');
         qorder = qorder.match(/\d+/);
         var answer_key = $('.answer-' + qorder).val().trim();
-        var keywords_key = $('.keyword-' + qorder).val();
+        var keywords_key = CKEDITOR.instances['input_explanation_' + qnumber].getData();
         if (answer_key != '') {
             listAnswer[qnumber] = answer_key;
         }

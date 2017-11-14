@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{asset('public/libs/font-awesome/css/font-awesome.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('public/css/client/readingLessonDetail.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/my-style.css')}}"/>
+    <link rel="stylesheet" href="{{asset('public/css/client/readingNavtabsVertical.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/client/readingFooterNavigation.css')}}"/>
     <link rel="stylesheet" href="{{asset('public/css/client/responsive.css')}}"/>
     <link rel="stylesheet" href="{{asset('public/css/client/readingClient.css')}}"/>

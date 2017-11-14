@@ -12,7 +12,7 @@
 
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/client/readingNavtabsVertical.css')}}">
+
 @endsection
 
 @section('titleTypeLesson')

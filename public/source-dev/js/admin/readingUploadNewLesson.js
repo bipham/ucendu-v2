@@ -57,7 +57,6 @@ var hltr = new TextHighlighter(sandbox, {
         $('.highlight-' + i).attr('data-qnumber', qnumber);
         var idClass = 'hl-answer-' + qnumber;
         $('.highlight-' + i).attr('id', idClass);
-        console.log('div: ' + $('.remove-ans-' + i).length);
         if ($('.remove-ans-' + i).length == 0) {
             $('.remove-highlight-area-' + i).append('<div class="remove-ans-' + i + '">Remove highlight for anwser ' + i + ': <button class="btn btn-info remove" data-removeid="' + i + '">Remove</button></div>');
         }
@@ -212,7 +211,7 @@ $( document ).ready(function() {
                                 '</div>' +
                                 '<div class="enter-keyword row-enter-custom">' +
                                 '<div class="title-row-enter">Explanation ' + qorder + ': </div>' +
-                                '<textarea class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
+                                '<textarea id="input_explanation_' + qnumber + '" class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
                                 '</div>' +
                                 '<div class="remove-highlight-area-' + qorder + '">' +
                                 '</div>' +
@@ -227,7 +226,7 @@ $( document ).ready(function() {
                                 '</div>' +
                                 '<div class="enter-keyword row-enter-custom">' +
                                 '<div class="title-row-enter">Explanation ' + qorder + ': </div>' +
-                                '<textarea class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
+                                '<textarea id="input_explanation_' + qnumber + '" class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
                                 '</div>' +
                                 '<div class="enter-type-question row-enter-custom">' +
                                 '<label for="select-type-question-' + qnumber + '" data-qnumber="' + qnumber + '"><strong>Chọn Loai cau hoi</strong></label> ' +
@@ -239,10 +238,11 @@ $( document ).ready(function() {
                                 '</div>' +
                                 '</div>');
                         }
+                        CKEDITOR.replace( 'input_explanation_' + qnumber);
                     }
                     if (jQuery.inArray(qnumber, listAnswer_source) == -1) {
                         $('input.answer-q[data-qnumber=' + qnumber + ']').val(listAnswer_source[qnumber]);
-                        $('textarea.input-keyword[data-qnumber=' + qnumber + ']').val(listKeyword_source[qnumber]);
+                        CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
                         $('.enter-type-question select[data-qnumber=' + qnumber + ']').val(list_type_questions_source[qnumber]);
                     }
                 });
@@ -310,24 +310,6 @@ $( document ).ready(function() {
                     '</div>' +
                     '</div>' +
                     '</div>' +
-                    // '<div class="solution-tools locate-highlight-tool">' +
-                    //     '<a class="btn btn-xs btn-outline-warning btn-locate-highlight" data-qnumber="' + qnumber +'" onclick="scrollToHighlight(' + qorder + ')">' +
-                    //         '<i class="fa fa-map-marker" aria-hidden="true"></i>' +
-                    //         '&nbsp;Locate' +
-                    //     '</a>' +
-                    // '</div>' +
-                    // '<div class="solution-tools locate-comment-tool">' +
-                    //     '<a class="btn btn-xs btn-outline-primary btn-show-comments" data-qnumber="' + qnumber +'" data-toggle="collapse" href="#commentArea-' + qnumber + '" aria-expanded="false" aria-controls="commentArea-' + qnumber + '" onclick="showComments(' + qnumber + ')">' +
-                    //         '<i class="fa fa-question" aria-hidden="true"></i>' +
-                    //         '&nbsp;Comments' +
-                    //     '</a>' +
-                    // '</div>' +
-                    // '<div class="collapse collage-comments collapse-custom" id="commentArea-' + qnumber +'"> ' +
-                    //     '<div class="card card-header comments-area-title">QUESTION & ANSWER:' +
-                    //     '</div>' +
-                    //     '<div class="card card-block comments-area">' +
-                    //     '</div>' +
-                    // '</div>' +
                     '</div>');
             });
             $('#pr-quiz input').each(function () {

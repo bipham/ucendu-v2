@@ -26,6 +26,10 @@ class ReadingLearningTypeQuestion extends Model
         return $this->where('status', 1)->where('type_question_id', $type_question_id)->orderBy('step_section', 'asc')->select('title_section', 'icon', 'step_section')->get()->all();
     }
 
+    public function getLearningDetail($learning_id) {
+        return $this->where('status',1)->where('id', $learning_id)->select('type_question_id', 'title_section', 'view_layout', 'content_section', 'left_content', 'right_content')->get()->all();
+    }
+
     public function createNewLearningTypeQuestion ($type_question_id, $title_section, $step_section, $view_layout, $icon, $content_section, $left_content, $right_content, $admin_responsibility) {
         if ($this->where('type_question_id', $type_question_id)->where('title_section', $title_section)->exists()) {
             // level found

@@ -143,15 +143,16 @@ $( document ).ready(function() {
                             '</div>' +
                             '<div class="enter-keyword row-enter-custom">' +
                             '<div class="title-row-enter">Explanation ' + qorder + ': </div>' +
-                            '<textarea class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
+                            '<textarea id="input_explanation_' + qnumber + '" class="input-keyword keyword-' + qorder + '" data-qnumber="' + qnumber + '"></textarea>' +
                             '</div>' +
                             '<div class="remove-highlight-area-' + qorder + '">' +
                             '</div>' +
                             '</div>');
+                        CKEDITOR.replace( 'input_explanation_' + qnumber);
                     }
                     if (jQuery.inArray(qnumber, listAnswer_source) == -1) {
                         $('input.answer-q[data-qnumber=' + qnumber + ']').val(listAnswer_source[qnumber]);
-                        $('textarea.input-keyword[data-qnumber=' + qnumber + ']').val(listKeyword_source[qnumber]);
+                        CKEDITOR.instances['input_explanation_' + qnumber].setData(listKeyword_source[qnumber]);
                     }
                 });
             }
@@ -198,22 +199,22 @@ $( document ).ready(function() {
                 qorder = qorder.match(/\d+/);
                 var answer_key = $('.answer-' + qorder).val();
                 $(this).parent().after( '<div class="explain-area explain-' + qorder + ' explain-area-' + qnumber + '" data-qnumber="' + qnumber + '" data-qorder="' + qorder + '" data-type-question="' + list_type_questions[qnumber] + '">' +
-                        '<div class="show-answer">' +
-                            '<button type="button" class="btn btn-danger btn-show-answer">Answer ' + qorder + ' ' +
-                                '<div class="badge badge-pill key-answer">' +
-                                    answer_key +
-                                '</div>' +
-                            '</button>' +
-                            '<div class="explain-show' + '" id="explain-' + qnumber +'"> ' +
-                                '<button type="button" class="btn btn-primary btn-show-explanation show-explanation-' + qnumber + '" data-qnumber="' + qnumber + '" data-qorder="' + qorder + '" data-type-question="' + list_type_questions[qnumber] + '" onclick="showExplanation(' + qnumber + ',' + qorder + ')">' +
-                                    '<i class="fa fa-key" aria-hidden="true"></i>' +
-                                    ' Explanation' +
-                                '</button>' +
-                                '<div class="hidden explanation">' +
-                                    listKeyword[qnumber] +
-                                '</div>' +
-                            '</div>' +
-                        '</div>' +
+                    '<div class="show-answer">' +
+                    '<button type="button" class="btn btn-danger btn-show-answer">Answer ' + qorder + ' ' +
+                    '<div class="badge badge-pill key-answer">' +
+                    answer_key +
+                    '</div>' +
+                    '</button>' +
+                    '<div class="explain-show' + '" id="explain-' + qnumber +'"> ' +
+                    '<button type="button" class="btn btn-primary btn-show-explanation show-explanation-' + qnumber + '" data-qnumber="' + qnumber + '" data-qorder="' + qorder + '" data-type-question="' + list_type_questions[qnumber] + '" onclick="showExplanation(' + qnumber + ',' + qorder + ')">' +
+                    '<i class="fa fa-key" aria-hidden="true"></i>' +
+                    ' Explanation' +
+                    '</button>' +
+                    '<div class="hidden explanation">' +
+                    listKeyword[qnumber] +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
                     // '<div class="solution-tools locate-highlight-tool">' +
                     // '<a class="btn btn-xs btn-outline-warning btn-locate-highlight" data-qnumber="' + qnumber +'" onclick="scrollToHighlight(' + qorder + ')">' +
                     // '<i class="fa fa-map-marker" aria-hidden="true"></i>' +
@@ -305,7 +306,7 @@ function checkStepAnswer() {
         var qorder = $(this).attr('name');
         qorder = qorder.match(/\d+/);
         var answer_key = $('.answer-' + qorder).val().trim();
-        var keywords_key = $('.keyword-' + qorder).val();
+        var keywords_key = CKEDITOR.instances['input_explanation_' + qnumber].getData();
         if (answer_key != '') {
             listAnswer[qnumber] = answer_key;
         }
@@ -334,9 +335,13 @@ $(document).on("change", "input.answer-q",function() {
     listAnswer_source[qnumber] = $(this).val();
 });
 
-$(document).on("change", "textarea.input-keyword",function() {
+editor.on('change', function() {
+    alert("TEST");
+});
+
+$(document).on("change", ".input-keyword",function() {
     var qnumber = $(this).data('qnumber');
-    listKeyword_source[qnumber] = $(this).val();
+    listKeyword_source[qnumber] = CKEDITOR.instances['input_explanation_' + qnumber].getData();
     if (listKeyword_source[qnumber] == '') {
         listClassKeyword[qnumber] = 'hidden-class';
     }

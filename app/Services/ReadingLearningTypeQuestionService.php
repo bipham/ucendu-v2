@@ -21,5 +21,9 @@ class ReadingLearningTypeQuestionService {
     public function getLearningOfTypeQuestion($type_question_id) {
         return $this->_readingLearningTypeQuestionModel->getLearningOfTypeQuestion($type_question_id);
     }
+
+    public function getLearningDetail($learning_id) {
+        return $this->_readingLearningTypeQuestionModel->getLearningDetail($learning_id);
+    }
 }
 ?>

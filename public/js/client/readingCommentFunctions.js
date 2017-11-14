@@ -46,7 +46,7 @@ function showExplanation(question_custom_id, question_order, isTrigger) {
             $(".left-panel-custom").animate({
                 scrollTop: v_l - t_l
             }, {
-                duration: 100,
+                duration: 2000,
                 complete: function () {
                 }
             });

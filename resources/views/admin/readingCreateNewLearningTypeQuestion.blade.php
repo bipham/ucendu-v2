@@ -65,7 +65,7 @@
                     </label>
                     <input type="number" class="form-control" min="1" max="2" value="1" placeholder="View layout" id="view_layout" name="view_layout" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group first-layout-content">
                     <label for="content_section">
                         Nội dung
                     </label>

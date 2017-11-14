@@ -27,23 +27,14 @@ CKEDITOR.editorConfig = function( config ) {
     // config.allowedContent = true;
 
 
-    config.toolbarGroups = [
-        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+    config.toolbar = [
+        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-'] },
+        { name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+        { name: 'insert', items: [ 'Image', 'Html5video', 'Table', 'HorizontalRule'] },
         '/',
-        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
         '/',
-        { name: 'insert', groups: [ 'insert' ] },
-        { name: 'forms', groups: [ 'forms' ] },
-        { name: 'links', groups: [ 'links' ] },
-        '/',
-        { name: 'styles', groups: [ 'styles' ] },
-        { name: 'colors', groups: [ 'colors' ] },
-        { name: 'tools', groups: [ 'tools' ] },
-        { name: 'about', groups: [ 'about' ] },
-        '/',
-        { name: 'others', groups: [ 'others' ] }
+        { name: 'others', items: [ 'checkbox_quiz', 'select_quiz', 'input_quiz', 'radio_quiz' ] }
     ];
 };
