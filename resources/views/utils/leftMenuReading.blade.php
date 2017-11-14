@@ -62,12 +62,12 @@
                         @foreach($all_introductions as $key_introduction => $introduction)
                             <li class="item-lesson level-one @if($introduction->id == $lesson_id_current) current-step @endif">
                                 <span class="pull-left title-lesson-menu">
-                                    <a href="{{url('/reading/' . $current_level_lesson->id . '-level/readingLesson/' . config('constants.type_lesson.mix_test') . '-mix_test/' . $introduction->id . '-mix_test')}}">
+                                    <a href="{{url('/reading/' . $current_level_lesson->id . '-level/readingViewLearning/' . config('constants.type_lesson.learning') . '-introduction/' . $introduction->id . '-introduction')}}">
                                         {!! $key_introduction + 1 !!}. {!! $introduction->title_section !!}
                                     </a>
                                 </span>
                                 <span class="pull-right tools-area-menu">
-                                    <a href="{{url('/reading/'. $current_level_lesson->id . '-level/readingViewSolutionLesson/' . config('constants.type_lesson.mix_test')  . 'mix_test-' . $introduction->id . $introduction->title_section)}}" class="badge badge-success link-solution-lesson">
+                                    <a href="{{url('/reading/'. $current_level_lesson->id . '-level/readingViewSolutionLesson/' . config('constants.type_lesson.learning')  . 'introduction-' . $introduction->id . $introduction->title_section)}}" class="badge badge-success link-solution-lesson">
                                         <i class="fa fa-key" aria-hidden="true"></i> Solution
                                     </a>
                                 </span>
@@ -139,7 +139,7 @@
                                         </span>
                                             @else
                                                 <span class="pull-left title-lesson-menu">
-                                            <a href="{{url('/reading/' . $level_lesson_id . '-level/readingLesson/' . config('constants.type_lesson.practice') . '-practice/' . $practice->id . '-practice-1')}}">
+                                            <a href="{{url('/reading/' . $level_lesson_id . '-level/readingLesson/' . config('constants.type_lesson.practice') . '-practice/' . $practice->id . '-practice')}}">
                                                 {!! $practice->title !!}
                                             </a>
                                         </span>

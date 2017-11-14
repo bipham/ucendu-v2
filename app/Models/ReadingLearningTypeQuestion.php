@@ -23,11 +23,11 @@ class ReadingLearningTypeQuestion extends Model
     }
 
     public function getLearningOfTypeQuestion($type_question_id) {
-        return $this->where('status', 1)->where('type_question_id', $type_question_id)->orderBy('step_section', 'asc')->select('title_section', 'icon', 'step_section')->get()->all();
+        return $this->where('status', 1)->where('type_question_id', $type_question_id)->orderBy('step_section', 'asc')->select('id', 'title_section', 'icon', 'step_section')->get()->all();
     }
 
     public function getLearningDetail($learning_id) {
-        return $this->where('status',1)->where('id', $learning_id)->select('type_question_id', 'title_section', 'view_layout', 'content_section', 'left_content', 'right_content')->get()->all();
+        return $this->where('status',1)->where('id', $learning_id)->select('type_question_id', 'title_section', 'view_layout', 'content_section', 'left_content', 'right_content')->get()->first();
     }
 
     public function createNewLearningTypeQuestion ($type_question_id, $title_section, $step_section, $view_layout, $icon, $content_section, $left_content, $right_content, $admin_responsibility) {
