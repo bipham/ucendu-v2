@@ -52,7 +52,7 @@
                 {!! $created_at !!}
             </td>
             <td>
-                {!! $lesson->User->username !!}
+                {!! $lesson->User['username'] !!}
             </td>
             <td>
                 <a href="{{url('editPracticeLessonReading/' . $lesson->id)}}">

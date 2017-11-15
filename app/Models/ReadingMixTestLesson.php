@@ -73,4 +73,8 @@ class ReadingMixTestLesson extends Model
     public function getDetailMixTestForClientSolution($lesson_id) {
         return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'content_highlight', 'level_lesson_id', 'content_answer_quiz', 'total_questions')->get()->first();
     }
+
+    public function getDetailMiniTestForClientSolution($lesson_id) {
+
+    }
 }

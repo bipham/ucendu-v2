@@ -44,7 +44,7 @@ class ReadingLessonController extends Controller
                 break;
             case 2:
                 if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
-                    return view('client.readingLessonDetail', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                    return view('client.readingViewTestDetail', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
                 }
                 else {
                     return abort(404);

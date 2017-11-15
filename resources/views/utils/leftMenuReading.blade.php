@@ -194,7 +194,7 @@
                                                 </span>
                                                     @else
                                                         <span class="pull-left title-lesson-menu">
-                                                    <a href="{{url('/reading/' . $level_lesson_id . '-level/readingLesson/' . config('constants.type_lesson.mini_test') . '-miniTest/' . $mini_test->id . '-miniTest-1')}}">
+                                                    <a href="{{url('/reading/' . $level_lesson_id . '-level/readingLesson/' . config('constants.type_lesson.mini_test') . '-miniTest/' . $mini_test->id . '-miniTest')}}">
                                                         {!! $mini_test->title !!}
                                                     </a>
                                                 </span>

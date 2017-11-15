@@ -73,4 +73,8 @@ class ReadingMiniTestLesson extends Model
     public function checkVipMiniTestLesson($lesson_id) {
         return $this->where('id', $lesson_id)->select('level_user_id')->get()->first();
     }
+
+    public function getDetailMiniTestForClientTest($lesson_id) {
+        return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'content_lesson', 'content_quiz', 'total_questions', 'type_question_id', 'limit_time')->get()->first();
+    }
 }
