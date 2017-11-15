@@ -70,4 +70,16 @@ class ReadingFullTestLesson extends Model
     public function updateNumberParagraphsOfFullTest($full_test_id, $number_paragraphs) {
         return $this->where('id', $full_test_id)->update(['number_paragraphs' => $number_paragraphs, 'updated_at' => Carbon::now()]);
     }
+
+    public function getAllFullTest($level_lesson_id) {
+        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->orderBy('order_lesson', 'asc')->select('id', 'title', 'level_user_id', 'order_lesson', 'limit_time', 'total_questions')->get()->all();
+    }
+
+    public function getDetailFullTestForClient($lesson_id) {
+        return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'limit_time', 'total_questions', 'number_paragraphs')->get()->first();
+    }
+
+    public function getTotalQuestionOfFullTestLesson($lesson_id) {
+        return $this->where('id', $lesson_id)->select('total_questions')->get()->first();
+    }
 }

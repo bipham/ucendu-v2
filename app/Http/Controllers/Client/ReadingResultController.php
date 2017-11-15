@@ -45,16 +45,14 @@ class ReadingResultController extends Controller
         $readingStatusLearningOfUserService = new ReadingStatusLearningOfUserService();
         $lesson = $readingLessonService->getLessonDetailForClientSolutionById($type_lesson_id, $lesson_id_current);
         $step_lesson_current = $readingLessonService->getCurrentStepOfLesson($type_lesson_id, $lesson_id_current);
-        if ($type_lesson_id > 2) {
-            $type_question_id_current = 0;
-        }
-        else {
-            $type_question_id_current = $lesson->type_question_id;
-        }
+
+        if($type_lesson_id > 2) $type_question_id_current = 0;
+        else $type_question_id_current = $lesson->type_question_id;
+
         $readingStatusLearningOfUserService->checkNextStepLesson($level_lesson_id, $type_lesson_id, $type_question_id_current, $correct_answer, $total_questions, $step_lesson_current);
-        $title_current_step = $lesson->title;
         switch ($type_lesson_id) {
             case 1:
+                $title_current_step = $lesson->title;
                 if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
                     return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
                 }
@@ -63,6 +61,7 @@ class ReadingResultController extends Controller
                 }
                 break;
             case 2:
+                $title_current_step = $lesson->title;
                 if ($lesson->typeQuestion->level_lesson_id == $level_lesson_id) {
                     return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
                 }
@@ -71,10 +70,14 @@ class ReadingResultController extends Controller
                 }
                 break;
             case 3:
+                $title_current_step = $lesson->title;
                 return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
                 break;
             case 4:
-                return view('client.readingViewResultLesson', compact('lesson_id_current', 'level_lesson_id', 'lesson', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
+                $title_current_step = $lesson['lesson_detail']->title;
+                $lesson_detail = $lesson['lesson_detail'];
+                $paragraphs = $lesson['paragraph_detail'];
+                return view('client.readingViewSolutionOfFullTest', compact('lesson_id_current', 'level_lesson_id', 'lesson_detail', 'paragraphs', 'correct_answer', 'total_questions', 'list_answer', 'title_current_step', 'type_question_id_current', 'type_lesson_id'));
                 break;
         }
     }

@@ -13,8 +13,8 @@ class ReadingTypeQuestionService {
         $this->_adminId = Auth::id();
     }
 
-    public function createNewTypeQuestion($name, $level_lesson_id) {
-        return $this->_readingTypeQuestionModel->createNewTypeQuestion($name, $level_lesson_id, $this->_adminId);
+    public function createNewTypeQuestion($name, $level_lesson_id, $tip_guide) {
+        return $this->_readingTypeQuestionModel->createNewTypeQuestion($name, $level_lesson_id, $tip_guide, $this->_adminId);
     }
 
     public function getAllTypeQuestionById($level_lesson_id) {

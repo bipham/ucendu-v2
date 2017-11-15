@@ -1,21 +1,21 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: BiPham
- * Date: 7/18/2017
- * Time: 8:30 PM
+ * User: nobikun1412
+ * Date: 15/11/2017
+ * Time: 10:20 AM
  */
 ?>
 @extends('layout.masterNoFooterClient')
 @section('meta-title')
-    Mix Test - {!! $lesson->title !!}
+    Full Test - {!! $lesson_detail->title !!}
 @endsection
 @section('css')
 
 @endsection
 
 @section('titleTypeLesson')
-    {!! $lesson->title !!}
+    {!! $lesson_detail->title !!}
 @endsection
 
 @section('typeLessonHeader')
@@ -31,7 +31,7 @@
                     <div class="content-breadcrumb-header content-banner-custom">
                         <div class="info-overview">
                             <div class="badge badge-primary countdown-time-overview">
-                                {!! $lesson->limit_time !!} mins
+                                {!! $lesson_detail->limit_time !!} mins
                             </div>
                             <h4 class="reading-title-start">
                                 Are you ready?
@@ -42,35 +42,20 @@
                 </div>
             </div>
         </div>
-        <div class="lesson-detail panel-container hidden">
-            <div class="left-panel-custom panel-left panel-top" id="lesson-content-area" data-lesson-id="{!! $lesson->id !!}">
-                {!! $lesson->content_lesson !!}
-            </div>
-            <div class="splitter">
-            </div>
-            <div class="splitter-horizontal">
-            </div>
-            <div class="right-panel-custom panel-right panel-bottom" id="quiz-test-area" data-quizId="{!! $lesson->id !!}" data-limit-time="{!! $lesson->limit_time !!}">
-                {!! $lesson->content_quiz !!}
-                <div class="reading-end-lesson end-lesson-area">
-                    <h4 class="title-end-lesson">
-                        --- End of the Test ---
-                    </h4>
-                    <h5 class="recomment-submit-lesson">
-                        Please Submit to view your score, solution and explanations.
-                    </h5>
-                    <button type="submit" class="btn btn-danger btn-submit-modal btn-custom" data-toggle="modal" data-target="#readingSubmitQuizModal">
-                        Submit
-                    </button>
-                    <div class="found-mistake">
-                        <a href="#" class="send-mistake">
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                            Found a mistake? Let us know!
-                        </a>
-                    </div>
+        @foreach($paragraphs as $key_paragraph => $paragraph)
+            <div class="lesson-detail panel-container hidden" data-order-paragraph="{!! $paragraph->order_paragraph !!}" data-paragraph-id="{!! $paragraph->id !!}">
+                <div class="left-panel-custom panel-left panel-top" id="lesson-content-area" data-lesson-id="{!! $lesson_detail->id !!}">
+                    {!! $paragraph->content_lesson !!}
+                </div>
+                <div class="splitter">
+                </div>
+                <div class="splitter-horizontal">
+                </div>
+                <div class="right-panel-custom panel-right panel-bottom" id="quiz-test-area" data-quizId="{!! $lesson_detail->id !!}" data-limit-time="{!! $lesson_detail->limit_time !!}">
+                    {!! $paragraph->content_quiz !!}
                 </div>
             </div>
-        </div>
+        @endforeach
     </div>
 @endsection
 
@@ -78,7 +63,7 @@
     <script src="{{asset('public/js/client/lessonDetail.js')}}"></script>
     <script src="{{asset('public/libs/countdown/jquery.countdown.js')}}"></script>
     <script type="text/javascript">
-        var limit_time = <?php print_r($lesson->limit_time); ?>;
+        var limit_time = <?php print_r($lesson_detail->limit_time); ?>;
         $('.btn-reading-start-test').click(function () {
             isStart = true;
             var limit_time_quiz = new Date().getTime() + limit_time*60000;
@@ -113,3 +98,4 @@
         });
     </script>
 @endsection
+

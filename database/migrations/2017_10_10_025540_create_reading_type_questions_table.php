@@ -17,6 +17,7 @@ class CreateReadingTypeQuestionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('level_lesson_id');
+            $table->text('tip_guide')->nullable();
             $table->integer('admin_responsibility')->unsigned();
             $table->boolean('status')->default(1);
 //            $table->foreign('level_lesson_id')->references('id')->on('reading_levels')->onDelete('cascade');

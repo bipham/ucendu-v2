@@ -36,23 +36,6 @@
             </div>
             <div class="right-panel-custom panel-right panel-bottom active-quiz" id="quiz-test-area" data-quizId="{!! $lesson->id !!}">
                 {!! $lesson->content_quiz !!}
-                <div class="reading-end-lesson end-lesson-area">
-                    <h4 class="title-end-lesson">
-                        --- End of the Test ---
-                    </h4>
-                    <h5 class="recomment-submit-lesson">
-                        Please Submit to view your score, solution and explanations.
-                    </h5>
-                    <button type="submit" class="btn btn-danger btn-submit-modal btn-custom" data-toggle="modal" data-target="#readingSubmitQuizModal">
-                        Submit
-                    </button>
-                    <div class="found-mistake">
-                        <a href="#" class="send-mistake">
-                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                            Found a mistake? Let us know!
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

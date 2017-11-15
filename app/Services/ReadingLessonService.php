@@ -181,7 +181,8 @@ class ReadingLessonService {
                 $result = $this->_readingMixTestLessonModel->getDetailMixTestForClientTest($lesson_id);
                 break;
             case 4:
-                $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
+                $result['lesson_detail'] = $this->_readingFullTestLessonModel->getDetailFullTestForClient($lesson_id);
+                $result['paragraph_detail'] = $this->_readingParagraphOfFullTestModel->getDetailParagraphForClientTest($lesson_id);
                 break;
         }
         return $result;
@@ -199,7 +200,8 @@ class ReadingLessonService {
                 $result = $this->_readingMixTestLessonModel->getDetailMixTestForClientSolution($lesson_id);
                 break;
             case 4:
-                $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
+                $result['lesson_detail'] = $this->_readingFullTestLessonModel->getDetailFullTestForClient($lesson_id);
+                $result['paragraph_detail'] = $this->_readingParagraphOfFullTestModel->getDetailParagraphForClientSolution($lesson_id);
                 break;
         }
         return $result;
@@ -289,7 +291,7 @@ class ReadingLessonService {
                 $result = $this->_readingMixTestLessonModel->getTotalQuestionOfMixTestLesson($lesson_id);
                 break;
             case 4:
-                $result = $this->_readingFullTestLessonModel->getTheLastLessonId();
+                $result = $this->_readingFullTestLessonModel->getTotalQuestionOfFullTestLesson($lesson_id);
                 break;
         }
         return $result['total_questions'];

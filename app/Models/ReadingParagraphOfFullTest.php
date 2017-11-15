@@ -39,4 +39,12 @@ class ReadingParagraphOfFullTest extends Model
         }
     }
 
+    public function getDetailParagraphForClientTest($lesson_id) {
+        return $this->where('full_test_id', $lesson_id)->where('status', 1)->select('id', 'content_lesson', 'content_quiz', 'order_paragraph')->orderBy('order_paragraph', 'asc')->get()->all();
+    }
+
+    public function getDetailParagraphForClientSolution($lesson_id) {
+            return $this->where('full_test_id', $lesson_id)->where('status', 1)->select('id', 'content_highlight', 'content_answer_quiz', 'order_paragraph')->orderBy('order_paragraph', 'asc')->get()->all();
+        }
+
 }

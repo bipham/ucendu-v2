@@ -17,11 +17,15 @@
         </div>
     </div>
     <div class="col-md-4 button-area">
-        @if(Route::current()->getName() == 'readingLesson')
-            @include('utils.readingLessonTestTools')
-        @endif
+
     </div>
     <div class="col-md-4 feedback-area">
-
+        @if(Route::current()->getName() == 'readingLesson')
+            @if($type_lesson_id == 4)
+                @include('utils.readingLessonTestTools', ['lesson' => $lesson_detail])
+            @else
+                @include('utils.readingLessonTestTools')
+            @endif
+        @endif
     </div>
 </footer>

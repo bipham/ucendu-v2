@@ -8,7 +8,7 @@ class ReadingTypeQuestion extends Model
 {
     protected $table = 'reading_type_questions';
 
-    protected $fillable = ['name', 'level_lesson_id', 'admin_responsibility', 'status'];
+    protected $fillable = ['name', 'level_lesson_id', 'tip_guide', 'admin_responsibility', 'status'];
 
     public $timestamps = true;
 
@@ -37,7 +37,7 @@ class ReadingTypeQuestion extends Model
         return $this->hasMany('App\Models\ReadingPracticeLesson', 'type_question_id');
     }
 
-    public function createNewTypeQuestion($name, $level_lesson_id, $admin_responsibility) {
+    public function createNewTypeQuestion($name, $level_lesson_id, $tip_guide, $admin_responsibility) {
         if ($this->where('name', $name)->where('level_lesson_id', $level_lesson_id)->exists()) {
             // Record found
             return 'fail';
@@ -46,6 +46,7 @@ class ReadingTypeQuestion extends Model
             $new_type_question = new ReadingTypeQuestion();
             $new_type_question->name = $name;
             $new_type_question->level_lesson_id = $level_lesson_id;
+            $new_type_question->tip_guide = $tip_guide;
             $new_type_question->admin_responsibility = $admin_responsibility;
             $new_type_question->save();
             return 'success';
