@@ -18,8 +18,8 @@ class CreateReadingResultLessonsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('lesson_id')->unsigned();
             $table->integer('type_lesson_id')->nullable();
-            $table->string('correct_answer');
-            $table->string('list_answered')->nullable();
+            $table->text('correct_answer');
+            $table->text('list_answered')->nullable();
             $table->integer('highest_correct');
 //            $table->foreign('user_id')->references('id')->on('reading_users')->onDelete('cascade');
             $table->timestamps();

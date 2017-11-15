@@ -77,4 +77,8 @@ class ReadingMiniTestLesson extends Model
     public function getDetailMiniTestForClientTest($lesson_id) {
         return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'content_lesson', 'content_quiz', 'total_questions', 'type_question_id', 'limit_time')->get()->first();
     }
+
+    public function getDetailMiniTestForClientSolution($lesson_id) {
+        return $this->where('status', 1)->where('id', $lesson_id)->select('id', 'title', 'content_highlight', 'content_answer_quiz', 'total_questions', 'type_question_id')->get()->first();
+    }
 }

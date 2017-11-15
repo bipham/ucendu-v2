@@ -28,5 +28,9 @@ class ReadingFullTestService
     public function createNewFullTest($title, $level_lesson_id, $level_user_id, $order_lesson, $limit_time) {
         return $this->_readingFullTestLessonModel->addNewFullTest($title, $level_lesson_id, $level_user_id, $order_lesson, $limit_time, $this->_adminId);
     }
+
+    public function getAllFullTest($level_lesson_id) {
+        return $this->_readingFullTestLessonModel->getAllFullTest($level_lesson_id);
+    }
 }
 ?>
