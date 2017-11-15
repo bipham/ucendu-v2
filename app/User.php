@@ -32,6 +32,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\ReadingPracticeLesson', 'admin_responsibility');
     }
 
+    public function typeQuestions()
+    {
+        return $this->hasMany('App\Models\ReadingTypeQuestion', 'admin_responsibility');
+    }
+
     public function lessonQuestionAnwsers()
     {
         return $this->hasMany('App\Models\ReadingQuestionAndAnswerLesson', 'user_id');

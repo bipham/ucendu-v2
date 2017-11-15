@@ -18,7 +18,7 @@ h4.reading-title-start {
 
 .overlay-lesson .outer-banner-custom {
     background-image: url(/public/imgs/original/cover-1.jpg);
-    height: 100%;
+    height: calc(100vh - 100px);
 }
 
 .btn-reading-start-test {

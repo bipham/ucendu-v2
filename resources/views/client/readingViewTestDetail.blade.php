@@ -29,6 +29,11 @@
             <div class="row-fluid header-product outer-banner-custom">
                 <div class="breadcrumb-header middle-banner-custom">
                     <div class="content-breadcrumb-header content-banner-custom">
+                        @if($type_lesson_id > 0 && $type_lesson_id < 3)
+                            <div class="tip-guide">
+                                {!! $lesson->typeQuestion->tip_guide !!}
+                            </div>
+                        @endif
                         <div class="info-overview">
                             <div class="badge badge-primary countdown-time-overview">
                                 {!! $lesson->limit_time !!} mins

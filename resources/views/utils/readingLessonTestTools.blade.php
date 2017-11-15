@@ -6,7 +6,7 @@
  * Time: 12:37 PM
  */
 ?>
-<div class="reading-tool-lesson-quiz">
+<div class="reading-tool-lesson-quiz hidden">
     <button type="button" class="btn btn-danger btn-tool-sidebar btn-submit-modal btn-custom" data-toggle="modal" data-target="#readingSubmitQuizModal">
         Submit
         <i class="fa fa-paper-plane icon-reading-tool-sidebar" aria-hidden="true"></i>

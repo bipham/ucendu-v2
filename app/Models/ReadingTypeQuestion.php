@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class ReadingTypeQuestion extends Model
@@ -37,6 +38,11 @@ class ReadingTypeQuestion extends Model
         return $this->hasMany('App\Models\ReadingPracticeLesson', 'type_question_id');
     }
 
+    public function User()
+    {
+        return $this->belongsTo('App\User', 'admin_responsibility');
+    }
+
     public function createNewTypeQuestion($name, $level_lesson_id, $tip_guide, $admin_responsibility) {
         if ($this->where('name', $name)->where('level_lesson_id', $level_lesson_id)->exists()) {
             // Record found
@@ -53,7 +59,20 @@ class ReadingTypeQuestion extends Model
         }
     }
 
+    public function updateTypeQuestion($name, $level_lesson_id, $tip_guide, $type_question_id, $admin_responsibility) {
+        $this->where('status', 1)->where('id', $type_question_id)->update(['name' => $name, 'level_lesson_id' => $level_lesson_id, 'tip_guide' => $tip_guide, 'admin_responsibility' => $admin_responsibility, 'updated_at' => Carbon::now()]);
+        return 'success';
+    }
+
     public function getAllTypeQuestionById($level_lesson_id) {
-        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->select('name', 'id')->get();
+        return $this->where('status', 1)->where('level_lesson_id', $level_lesson_id)->select('name', 'id')->get()->all();
+    }
+
+    public function getAllTypeQuestion() {
+        return $this->where('status', 1)->orderBy('created_at','desc')->get()->all();
+    }
+
+    public function getDetailTypeQuestion($type_question_id) {
+        return $this->where('status', 1)->where('id', $type_question_id)->select('id', 'name', 'level_lesson_id', 'tip_guide')->get()->first();
     }
 }

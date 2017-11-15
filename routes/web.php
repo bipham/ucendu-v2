@@ -64,6 +64,10 @@ Route::group(['domain' => 'admin.{nameDomain}', 'middleware' => ['adminAuth']], 
     //********** For Reading Question *************
     Route::get('createNewTypeQuestion',['as'=>'getCreateNewTypeQuestion','uses'=>'Admin\ReadingTypeQuestionController@getCreateNewTypeQuestion']);
     Route::post('createNewTypeQuestion',['as'=>'postCreateNewTypeQuestion','uses'=>'Admin\ReadingTypeQuestionController@postCreateNewTypeQuestion']);
+    Route::get('managerTypeQuestion',['as'=>'managerTypeQuestion','uses'=>'Admin\ReadingTypeQuestionController@managerTypeQuestion']);
+    Route::get('editTypeQuestion/{type_question_id}',['as'=>'getEditTypeQuestion','uses'=>'Admin\ReadingTypeQuestionController@getEditTypeQuestion']);
+    Route::post('updateTypeQuestion/{type_question_id}',['as'=>'updateTypeQuestion','uses'=>'Admin\ReadingTypeQuestionController@updateTypeQuestion']);
+
     Route::get('createNewLearningTypeQuestion',['as'=>'getCreateNewLearningTypeQuestion','uses'=>'Admin\ReadingLearningTypeQuestionController@getCreateNewLearningTypeQuestion']);
     Route::post('createNewLearningTypeQuestion',['as'=>'postCreateNewLearningTypeQuestion','uses'=>'Admin\ReadingLearningTypeQuestionController@postCreateNewLearningTypeQuestion']);
     Route::get('getTypeQuestionByLevelLessonId',['as'=>'getTypeQuestionByLevelLessonId','uses'=>'Admin\ReadingTypeQuestionController@getTypeQuestionByLevelLessonId']);

@@ -43,6 +43,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/managerCommentReading')}}">Manager_comment</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url('/managerTypeQuestion')}}">Manager_type_question</a>
+                </li>
             </ul>
         </div>
     </div>

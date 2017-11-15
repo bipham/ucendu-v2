@@ -11,7 +11,6 @@ class ReadingCommentController extends Controller
     public function managerCommentReading() {
         $readingQuestionAnswerLessonService = new ReadingQuestionAnswerLessonService();
         $all_comments = $readingQuestionAnswerLessonService->getAllComments();
-//        dd($all_comments);
         return view('admin.readingManagerComments', compact('all_comments'));
     }
 
