@@ -13,38 +13,42 @@
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/admin/admin-style.css')}}">
-    <link rel="stylesheet" href="{{asset('public/css/admin/upload.css')}}">
     <script src="/public/libs/ckeditor/ckeditor.js"></script>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col col-md-5 text-center">
+            <div class="upload-new-type-question">
                 @include('utils.message')
                 {{--@include('errors.input')--}}
-                <form role="form" action="{!! url('createNewTypeQuestion') !!}" method="POST">
-                    <input type="hidden" name="_token" value="{!!csrf_token()!!}">
-                    <h1>Create Type Question</h1>
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="level_lesson">
-                            Chọn Danh Mục
-                        </label>
-                        <select class="form-control" id="level-lesson" name="level_lesson" >
-                            @foreach($all_level_lessons as $level_lesson)
-                                <option value="{!! $level_lesson->id !!}">{!! $level_lesson->level !!}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <CENTER>
-                        <button type="submit" class="btn btn-lg btn-warning">
-                            Create
-                        </button>
-                    </CENTER>
-                </form>
+                <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+                <h1>Create Type Question</h1>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="level_lesson">
+                        Chọn Danh Mục
+                    </label>
+                    <select class="form-control" id="level-lesson" name="level_lesson" >
+                        @foreach($all_level_lessons as $level_lesson)
+                            <option value="{!! $level_lesson->id !!}">{!! $level_lesson->level !!}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group introduction">
+                    <label for="tip_guide">
+                        Nội dung
+                    </label>
+                    <textarea id="tip_guide" rows="10" cols="80" name="tip_guide"></textarea>
+                    <script>
+                        CKEDITOR.replace( 'tip_guide' );
+                    </script>
+                </div>
+                <button type="submit" class="btn btn-lg btn-warning" onclick="submitNewTypeQuestion()">
+                    Create
+                </button>
             </div>
         </div>
     </div>

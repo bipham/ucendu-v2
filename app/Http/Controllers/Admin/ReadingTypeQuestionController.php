@@ -17,22 +17,24 @@ class ReadingTypeQuestionController extends Controller
     }
 
     public function postCreateNewTypeQuestion($domain) {
-        $name = Input::get('name');
-        $level_lesson_id = Input::get('level_lesson');
+        $name = $_POST['name_type_question'];
+        $level_lesson_id = $_POST['level_lesson_selected'];
+        $tip_guide = $_POST['tip_guide'];
         if (!$name || !$level_lesson_id) {
-            $message = ['flash_level'=>'danger message-custom','flash_message'=>'Please fill all input!'];
+            $message = 'Please fill all input!';
+            $result = 'fail';
         }
         else {
             $readingTypeQuestionService = new ReadingTypeQuestionService();
-            $result = $readingTypeQuestionService->createNewTypeQuestion($name, $level_lesson_id);
+            $result = $readingTypeQuestionService->createNewTypeQuestion($name, $level_lesson_id, $tip_guide);
             if ($result == 'success') {
-                $message = ['flash_level'=>'success message-custom','flash_message'=>'Create new type question success!'];
+                $message = 'Create new type question success!';
             }
             else {
-                $message = ['flash_level'=>'danger message-custom','flash_message'=>'This type question is not available!'];
+                $message = 'This type question is not available!';
             }
         }
-        return redirect('createNewTypeQuestion')->with($message);
+        return json_encode(['result' => $result, 'message' => $message]);
     }
 
     public function getTypeQuestionByLevelLessonId($domain) {
