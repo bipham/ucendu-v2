@@ -45,18 +45,27 @@ gulp.task('css-client', function () {
 gulp.task('js-both', function () {
     return gulp.src('public/source-dev/js/*.js')
         .pipe(uglify())
+        .on('error', function(err) {
+            console.error('Error in compress task', err.toString());
+        })
         .pipe(gulp.dest('public/js/'));
 });
 
 gulp.task('js-admin', function () {
     return gulp.src('public/source-dev/js/admin/*.js')
         .pipe(uglify())
+        .on('error', function(err) {
+            console.error('Error in compress task', err.toString());
+        })
         .pipe(gulp.dest('public/js/admin/'));
 });
 
 gulp.task('js-client', function () {
     return gulp.src('public/source-dev/js/client/*.js')
         .pipe(uglify())
+        .on('error', function(err) {
+            console.error('Error in compress task', err.toString());
+        })
         .pipe(gulp.dest('public/js/client/'));
 });
 
@@ -109,6 +118,22 @@ gulp.task('images-original', function(){
         .pipe(gulp.dest('public/imgs/original/'))
 });
 
+gulp.task('images-upload', function(){
+    return gulp.src('public/upload/images/*.+(png|jpg|jpeg|gif|svg)')
+        .pipe(imagemin([
+            imagemin.gifsicle({interlaced: true}),
+            imagemin.jpegtran({progressive: true}),
+            imagemin.optipng({optimizationLevel: 5}),
+            imagemin.svgo({
+                plugins: [
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
+                ]
+            })
+        ]))
+        .pipe(gulp.dest('public/upload/images/'))
+});
+
 //Watch:
 gulp.task('watch', function() {
     gulp.watch('public/source-dev/css/*.css', ['css-both']);
@@ -120,6 +145,7 @@ gulp.task('watch', function() {
     gulp.watch('public/source-dev/imgs/background-header/*.+(png|jpg|jpeg|gif|svg)', ['images-bg-header']);
     gulp.watch('public/source-dev/imgs/banner-page/*.+(png|jpg|jpeg|gif|svg)', ['images-banner-page']);
     gulp.watch('public/source-dev/imgs/original/*.+(png|jpg|jpeg|gif|svg)', ['images-original']);
+    gulp.watch('public/upload/images/*.+(png|jpg|jpeg|gif|svg)', ['images-upload']);
 });
 
 // Watch Files For Change:
@@ -141,6 +167,6 @@ gulp.task('browser-sync', function () {
 // Default Task:
 gulp.task('default', ['first-task', 'css-both', 'css-admin', 'css-client']);
 
-gulp.task('compressImages', ['images-bg-header', 'images-original', 'images-banner-page']);
+gulp.task('compressImages', ['images-bg-header', 'images-original', 'images-banner-page', 'images-upload']);
 
 gulp.task('jsMinify', ['js-both', 'js-admin', 'js-client']);

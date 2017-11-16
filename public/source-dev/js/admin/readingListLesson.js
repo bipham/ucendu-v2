@@ -1,10 +1,6 @@
 /**
  * Created by BiPham on 8/17/2017.
  */
-$.ajaxSetup({
-    ``
-});
-
 var baseUrl = document.location.origin;
 var ajaxUpdateInfoBasic = baseUrl + '/updateInfoBasicReadingLesson/';
 var img_url = '';
